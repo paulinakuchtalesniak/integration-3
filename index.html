@@ -4,12 +4,46 @@
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <link rel="stylesheet" href="src/styles/reset.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="src/styles/style.css">
   <title>Vite App</title>
 </head>
 
 <body>
-  <p>deployment test</p>
+  <div class="content-wrapper">
+    <header>
+      <div class="navigation-wrapper">
+        <div class="logo-wrapper">
+          <h1 class="header__heading visually-hidden">Full Speed Ahead</h1>
+          <a class="header__link-logo" href="#">
+            <img class="header__logo" src="src/assets/header/train-world-logo.png" alt="Train World Museum Logo">
+          </a>
+        </div>
+
+
+
+        <nav class="header__navigation">
+          <ul class="navigation__list">
+            <li class="navigation__list-item"><a class="navigation__list-link" href="#">Home</a></li>
+            <li class="navigation__list-item"><a class="navigation__list-link" href="#">Exhibits</a></li>
+            <li class="navigation__list-item"><a class="navigation__list-link" href="#">Events</a></li>
+            <li class="navigation__list-item"><a class="navigation__list-link" href="#">About</a></li>
+            <li class="navigation__list-item"><a class="navigation__list-link" href="#">Contact</a></li>
+          </ul>
+        </nav>
+        <div class="header__hamburger">
+          <div class="hamburger__line"></div>
+          <div class="hamburger__line"></div>
+          <div class="hamburger__line"></div>
+        </div>
+      </div>
+      <div class="illustration-wrapper">
+        <div class="header__photo"></div>
+        <img class="header__illustration" src=" src/assets/svg/ticket-small-header.svg" alt="">
+      </div>
+    </header>
+  </div>
 </body>
 
 </html>
