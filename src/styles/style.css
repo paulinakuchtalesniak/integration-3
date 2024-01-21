@@ -84,9 +84,7 @@ header {
 
 }
 
-.content-wrapper {
-    max-width: 100vw;
-}
+
 
 /* NAVIGATION BAR */
 .navigation-wrapper {
@@ -105,8 +103,6 @@ header {
     max-width: var(--space-xl);
     max-height: var(--space-xl);
 }
-
-
 
 .hamburger__line {
     width: 3rem;
@@ -127,14 +123,10 @@ header {
     grid-template-rows: 100%;
 }
 
-
-
-
 .header__illustration--big {
     display: none;
 
 }
-
 
 .illustration-small__wrapper {
 
@@ -157,13 +149,10 @@ header {
 }
 
 
-.first-section {
-    height: 100vh;
-    background-color: var(--color-primary-yellow);
+
+.content-wrapper {
+    max-width: 100vw;
 }
-
-
-
 
 @media screen and (min-width: 768px) and (orientation: landscape) {
     .header__illustration--small {
@@ -332,13 +321,14 @@ header {
         width: 40ch;
 
     }
-           .header__tittle--first,
-           .header__tittle--second,
-           .header__tittle--third {
-    
-               font-size: calc(var(--step-5)*1.1);
-    
-           }
+
+    .header__tittle--first,
+    .header__tittle--second,
+    .header__tittle--third {
+
+        font-size: calc(var(--step-5)*1.1);
+
+    }
 }
 
 
@@ -351,12 +341,140 @@ header {
         padding-left: calc(var(--space-2xl));
         width: 40ch;
     }
-        .header__tittle--first,
-        .header__tittle--second,
-        .header__tittle--third {
-            padding-left: calc(var(--space-2xl));
-            font-size: calc(var(--step-5)*1.25);
-           
-        }
 
+    .header__tittle--first,
+    .header__tittle--second,
+    .header__tittle--third {
+        padding-left: calc(var(--space-2xl));
+        font-size: calc(var(--step-5)*1.25);
+
+    }
+
+}
+
+/* SECTION 1 */
+
+.first-section {
+
+    background-color: var(--color-primary-yellow);
+    padding-bottom: var(--space-l);
+}
+
+.idea-text__wrapper {
+    padding: var(--space-3xl) var(--space-xs) var(--space-m) var(--space-xs);
+
+}
+
+.idea-heading__wrapper {
+    display: flex;
+    align-items: flex-end;
+    gap: var(--space-m);
+}
+
+.idea-section__heading {
+    font-family: var(--heading-font);
+    font-size: var(--step-5);
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--color-dark-blue);
+}
+
+.idea-section__description {
+    font-size: var(--step-0);
+    margin-top: var(--space-xs);
+    color: var(--color-body-copy-dark);
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+.idea-section__illustration {
+    height: 15vw;
+}
+
+.idea-map__wrapper {
+    padding-left: 5vw;
+}
+
+.idea-map__wrapper svg {
+    width: 100%;
+    height: auto;
+
+}
+
+.idea__emphasized-span {
+
+    font-weight: 700;
+}
+
+@media screen and (min-width: 500px) and (max-width: 767px) {
+    .idea-text__wrapper {
+        padding: var(--space-3xl) var(--space-m) var(--space-m) var(--space-m);
+
+    }
+
+    .idea-map__wrapper {
+        padding-top: 5vw;
+        display: flex;
+        justify-content: center;
+        padding-left: 0;
+    }
+
+    .idea-map__wrapper svg {
+        width: 70%;
+        height: auto;
+    }
+
+    .idea-section__illustration {
+        height: 12vw;
+    }
+}
+
+@media screen and (min-width: 768px) {
+
+    .first-section {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        padding: var(--space-3xl) 0;
+        align-items: center;
+    }
+
+    .idea-text__wrapper {
+        grid-column: 2;
+        grid-row: 1;
+        padding: var(--space-3xl) var(--space-m) var(--space-m) var(--space-s);
+    }
+
+    .idea-section__description {
+        font-size: var(--step-0);
+        margin-top: var(--space-xs);
+        color: var(--color-body-copy-dark);
+        font-weight: 400;
+        line-height: 1.5;
+    }
+
+    .idea-section__illustration {
+        height: 10vw;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .idea-section__illustration {
+        height: 8vw;
+    }
+
+}
+
+@media screen and (min-width: 1200px) {
+    .first-section {
+        grid-template-columns: 45% 55%;
+    }
+
+    .idea-section__illustration {
+        height: 7vw;
+    }
+
+    .idea-text__wrapper {
+
+        padding: var(--space-3xl) var(--space-2xl) var(--space-m) var(--space-2xl);
+    }
 }
