@@ -6,13 +6,21 @@
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <link rel="stylesheet" href="src/styles/reset.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Oxanium:wght@200;300;400;500;600;700;800&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="src/styles/style.css">
-  <title>Vite App</title>
+  <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
+
+  <title>Full Speed Ahead</title>
 </head>
 
 <body>
   <div class="content-wrapper">
     <header>
+
       <div class="navigation-wrapper">
         <div class="logo-wrapper">
           <h1 class="header__heading visually-hidden">Full Speed Ahead</h1>
@@ -25,11 +33,12 @@
 
         <nav class="header__navigation">
           <ul class="navigation__list">
-            <li class="navigation__list-item"><a class="navigation__list-link" href="#">Home</a></li>
-            <li class="navigation__list-item"><a class="navigation__list-link" href="#">Exhibits</a></li>
-            <li class="navigation__list-item"><a class="navigation__list-link" href="#">Events</a></li>
-            <li class="navigation__list-item"><a class="navigation__list-link" href="#">About</a></li>
-            <li class="navigation__list-item"><a class="navigation__list-link" href="#">Contact</a></li>
+            <li class="navigation__list-item"><a class="navigation__list-link" href="#">Idea</a></li>
+            <li class="navigation__list-item"><a class="navigation__list-link" href="#">Dispute</a></li>
+            <li class="navigation__list-item"><a class="navigation__list-link" href="#">HSL Expansion</a></li>
+            <li class="navigation__list-item"><a class="navigation__list-link" href="#">Restructuring</a></li>
+            <li class="navigation__list-item"><a class="navigation__list-link" href="#">Technological Advancements</a>
+            </li>
           </ul>
         </nav>
         <div class="header__hamburger">
@@ -38,11 +47,45 @@
           <div class="hamburger__line"></div>
         </div>
       </div>
+      <div class="header__photo"></div>
       <div class="illustration-wrapper">
-        <div class="header__photo"></div>
-        <img class="header__illustration" src=" src/assets/svg/ticket-small-header.svg" alt="">
+        <div class="illustration-small__wrapper">
+          <img class="header__illustration header__illustration--small" src=" src/assets/svg/ticket-small-back.svg"
+            alt="">
+          <img class="header__illustration header__illustration--small" src=" src/assets/svg/ticket-small-top.svg"
+            alt="">
+
+        </div>
+        <div class="illustration-big__wrapper">
+          <img class="header__illustration header__illustration--big" src=" src/assets/svg/bacground-big-ticket.svg"
+            alt="">
+          <div class="header__illustration--big header__text-illustration--big">
+            <img class="header__illustration  header__illustration--big  " src=" src/assets/svg/new-ticket.svg" alt="">
+            <p class="header__tittle--first">Full</p>
+            <p class="header__tittle--second">Speed</p>
+            <p class="header__tittle--third">Ahead</p>
+            <p class="header__des--third">History of High Speed Lines Development in Belgium</p>
+
+          </div>
+        </div>
       </div>
     </header>
+    <section class="first-section">
+      <div>
+      <h2>Hsl idea</h2>
+      <img src="" alt="">
+      <p>At the <span>1986</span> annual <span>conference of the Ministers of Transport for France, Germany, Belgium and The Netherlands,</span> a
+      high-speed network between Paris – Brussels - Cologne/Amsterdam, or <span>PBKAL</span> for short (the first letters of each connected
+      city) was discussed for the first time. The L referred to London, which would also be connected to this network via the
+      Channel Tunnel.</p>
+      </div>
+      
+    </section>
+    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
+
+    <dotlottie-player src="https://lottie.host/d923b6b1-7ce9-48b0-9e08-52b33e9f54f7/EpwwldPbiv.json"
+      background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></dotlottie-player>
+
   </div>
 </body>
 
