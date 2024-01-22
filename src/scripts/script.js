@@ -38,3 +38,4 @@ window.addEventListener("resize", () => {
   setupAnimations(); // Re-setup animations with new height
   console.log("resize");
 });
+

@@ -92,7 +92,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--space-xs);
+    padding: var(--space-3xs);
     grid-row: 1;
     grid-column: 1;
     position: fixed;
@@ -492,6 +492,10 @@ header {
     display: none;
 }
 
+.moving-circle--desktop {
+    display: none;
+}
+
 .desktop-timeline__side-part {
     display: none;
 }
@@ -714,7 +718,8 @@ header {
 
         }
 
-        .timeline-desktop {
+        .timeline-desktop,
+        .timeline-desktop--opacity {
             display: block;
             width: 1.5vw;
             background-color: var(--color-primary);
@@ -724,6 +729,23 @@ header {
             justify-self: center;
             z-index: 2;
             border-radius: 5rem;
+        }
+
+        .moving-circle--desktop {
+            display: block;
+            grid-column: 1/4;
+            grid-row: 1/7;
+            justify-self: center;
+            z-index: 2;
+        }
+
+        .timeline-desktop {
+            height: 5vh;
+        }
+
+        .timeline-desktop--opacity {
+            height: 100%;
+            opacity: 0.5;
         }
 
         .desktop-timeline__side-part--left,
@@ -755,7 +777,38 @@ header {
 
     @media screen and (min-width: 1200px) {
         .second-section {
-            grid-template-columns: 40vw 20vw 40vw;
+            grid-template-columns: 35vw 30vw 35vw;
+        }
+
+
+
+        .facts-timeline__article--first,
+        .facts-timeline__article--second,
+        .facts-timeline__article--third,
+        .facts-timeline__article--fourth {
+            grid-template-columns: 10vw 35vw 10vw 35vw 10vw;
+        }
+
+
+
+
+        .desktop-timeline__side-part--left,
+        .desktop-timeline__side-part--right {
+            width: 35vw;
+        }
+
+
+
+        .facts-timeline__article--second .desktop-timeline__side-part--right,
+        .facts-timeline__article--fourth .desktop-timeline__side-part--right {
+
+            grid-column: 2/4;
+            width: 35vw;
+        }
+
+        .facts-timeline__article-photo--left,
+        .facts-timeline__article-photo--right {
+            justify-self: center;
         }
     }
 
@@ -767,5 +820,6 @@ header {
 /* THIRD SECTION */
 
 .third-section {
-    height: 100vh;
+ background-color: var(--color-primary);
+ min-height: 100vh;
 }
