@@ -42,15 +42,24 @@ window.addEventListener("resize", () => {
 const front = document.querySelectorAll(".scanned-ticked__front");
 const back = document.querySelectorAll(".scanned-ticked__back");
 
+const wrapper = document.querySelector(".scanned-ticket__wrapper");
+
 const handleFlip = (frontElement, backElement) => {
   return function () {
+
+    wrapper.style.scrollSnapType = "none";
+
     frontElement.classList.toggle("flipped");
     backElement.classList.toggle("flipped");
+
+    setTimeout(() => {
+      wrapper.style.scrollSnapType = "x mandatory";
+    }, 200); 
   };
 };
 
 front.forEach((frontItem, index) => {
-  const backItem = back[index]; // Assuming the index of front and back items are aligned
+  const backItem = back[index]; 
   frontItem.addEventListener("click", handleFlip(frontItem, backItem));
   backItem.addEventListener("click", handleFlip(frontItem, backItem));
 });
