@@ -15,7 +15,7 @@ function setupAnimations() {
       scrub: 0.4,
       // markers: true,
     },
-    y: sectionHeight, // updated to use the section height
+    y: sectionHeight, 
     ease: "none",
   });
 
@@ -26,7 +26,7 @@ function setupAnimations() {
       end: "bottom center",
       scrub: 0.4,
     },
-    width: sectionHeight, // updated to use the section height
+    width: sectionHeight, 
     ease: "none",
   });
 }
@@ -35,7 +35,8 @@ setupAnimations();
 
 // Resize event
 window.addEventListener("resize", () => {
-  setupAnimations(); // Re-setup animations with new height
+  setupAnimations(); 
   console.log("resize");
 });
+
 
