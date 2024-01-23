@@ -1,9 +1,9 @@
 gsap.registerPlugin(ScrollTrigger);
 
-function getSectionHeight() {
+const getSectionHeight = () => {
   const section = document.querySelector(".second-section");
   return section.clientHeight;
-}
+};
 
 function setupAnimations() {
   const sectionHeight = getSectionHeight();
@@ -15,7 +15,7 @@ function setupAnimations() {
       scrub: 0.4,
       // markers: true,
     },
-    y: sectionHeight, 
+    y: sectionHeight,
     ease: "none",
   });
 
@@ -26,7 +26,7 @@ function setupAnimations() {
       end: "bottom center",
       scrub: 0.4,
     },
-    width: sectionHeight, 
+    width: sectionHeight,
     ease: "none",
   });
 }
@@ -35,8 +35,22 @@ setupAnimations();
 
 // Resize event
 window.addEventListener("resize", () => {
-  setupAnimations(); 
+  setupAnimations();
   console.log("resize");
 });
 
+const front = document.querySelectorAll(".scanned-ticked__front");
+const back = document.querySelectorAll(".scanned-ticked__back");
 
+const handleFlip = (frontElement, backElement) => {
+  return function () {
+    frontElement.classList.toggle("flipped");
+    backElement.classList.toggle("flipped");
+  };
+};
+
+front.forEach((frontItem, index) => {
+  const backItem = back[index]; // Assuming the index of front and back items are aligned
+  frontItem.addEventListener("click", handleFlip(frontItem, backItem));
+  backItem.addEventListener("click", handleFlip(frontItem, backItem));
+});

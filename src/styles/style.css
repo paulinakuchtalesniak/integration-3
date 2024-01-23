@@ -1313,3 +1313,66 @@ header {
     }
 
 }
+
+/* SECTION 5 */
+
+.scanned-ticket__wrapper {
+    display: grid;
+    grid-template-columns: 100%;
+
+
+}
+
+.scanned-ticket {
+    justify-self: center;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 100%;
+    place-content: center;
+    perspective: 1000px;
+
+
+}
+
+
+
+.scanned-ticked__front,
+.scanned-ticked__back {
+    grid-row: 1;
+    grid-column: 1;
+    display: grid;
+    grid-template-columns: repeat(3, 33.3%);
+    grid-template-rows: 20% auto;
+    padding: var(--space-s) var(--space-m) var(--space-s) var(--space-m);
+    transition: transform 0.5s ease;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+
+}
+
+.scanned-ticked__back {
+    transform: perspective(1000px) rotateY(180deg);
+}
+
+.scanned-ticked__back.flipped {
+    transform: perspective(1000px) rotateY(0deg);
+}
+
+.scanned-ticked__front {
+    transform: perspective(1000px) rotateY(0deg);
+}
+
+.scanned-ticked__front.flipped {
+    transform: perspective(1000px) rotateY(-180deg);
+}
+
+
+.scanned-ticked__front-heaading {
+    grid-column: 1/4;
+    grid-row: 1;
+}
+
+.scanned-ticked__front-svg {
+    grid-column: 1/4;
+    grid-row: 1/3;
+}
