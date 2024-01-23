@@ -46,7 +46,6 @@ const wrapper = document.querySelector(".scanned-ticket__wrapper");
 
 const handleFlip = (frontElement, backElement) => {
   return function () {
-
     wrapper.style.scrollSnapType = "none";
 
     frontElement.classList.toggle("flipped");
@@ -54,12 +53,36 @@ const handleFlip = (frontElement, backElement) => {
 
     setTimeout(() => {
       wrapper.style.scrollSnapType = "x mandatory";
-    }, 200); 
+    }, 200);
   };
 };
+if (window.innerWidth < 1200) {
+  front.forEach((frontItem, index) => {
+    const backItem = back[index];
+    frontItem.addEventListener("click", handleFlip(frontItem, backItem));
+    backItem.addEventListener("click", handleFlip(frontItem, backItem));
+  });
+} else {
+  const updateDescription = (clickedSection) => {
+    console.log(clickedSection);
+    const name = clickedSection.getAttribute("data-name");
 
-front.forEach((frontItem, index) => {
-  const backItem = back[index]; 
-  frontItem.addEventListener("click", handleFlip(frontItem, backItem));
-  backItem.addEventListener("click", handleFlip(frontItem, backItem));
-});
+    const correspondingDescription = document.querySelector(
+      `.ticket__description[data-name="${name}"]`
+    );
+    console.log(correspondingDescription);
+
+    document.querySelectorAll(".ticket__description").forEach((description) => {
+      if (description === correspondingDescription) {
+        console.log("yes");
+        description.style.display = "block";
+      } else {
+        description.style.display = "none";
+      }
+    });
+  };
+
+  document.querySelectorAll(".scanned-ticket").forEach((section) => {
+    section.addEventListener("click", () => updateDescription(section));
+  });
+}

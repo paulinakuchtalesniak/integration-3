@@ -22,6 +22,7 @@
 
     /* colors */
     --color-primary: #F0F0F0;
+   
     --color-body-copy-dark: #47515A;
     --color-dark-blue: #256CB0;
     --color-light-blue: #56A2E9;
@@ -1315,13 +1316,21 @@ header {
 }
 
 /* SECTION 5 */
+
+.ticket__description{
+    display: none;
+    min-height: 10vh;
+    color: #256CB0;
+}
 .section-fifth {
     padding-bottom: var(--space-2xl);
+        background-color: var(--color-primary);
 }
 
 .scanned-ticket__heading--desktop {
     display: none;
 }
+
 
 .scanned-ticket__heading--desktop,
 .scanned-ticket__heading--phone {
@@ -1429,11 +1438,7 @@ header {
 }
 
 
-.section-sixth {
-    background-color: var(--color-primary-yellow);
-    padding: var(--space-2xl) 0;
-    height: 100vh;
-}
+
 
 @media screen and (min-width: 600px) {
 
@@ -1481,5 +1486,84 @@ header {
         margin-bottom: 20px;
 
     }
+}
 
+@media screen and (min-width: 1200px) {
+    .desktop-tickets__wrapper {
+        min-height: 10vh;
+    }
+
+    .scanned-ticket__heading--phone {
+        display: none;
+    }
+
+    .scanned-ticket__heading--desktop {
+        display: block;
+        padding: var(--space-3xl) var(--space-m) var(--space-xl) var(--space-xl);
+        line-height: 1.2;
+    }
+
+    .scanned-ticket__wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        overflow-x: hidden;
+        justify-content: center;
+
+    }
+
+    .scanned-ticket {
+        flex: 0 0 auto;
+        width: 18vw;
+        perspective: 1000px;
+        display: grid;
+        margin-bottom: 20px;
+
+    }
+
+    .scanned-ticked__front-heaading {
+        padding: var(--space-xs) var(--space-s) var(--space-xs) var(--space-s);
+        font-size: calc(var(--step--2));
+    }
+
+    .scanned-ticked__back {
+        display: none;
+    }
+   
+
+}
+
+
+/* SECTION 6 */
+.section-sixth {
+    padding-top: var(--space-xl);
+    background-color: var(--color-primary);
+    padding: var(--space-2xl) 0;
+    min-height: 10vh;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3xl);
+    overflow-x: hidden;
+}
+.train-left{
+    transform: translateX(30%);
+    height: 30vh;
+    align-self: flex-end;
+}
+.train-right {
+    transform: translateX(-70%);
+    height: 30vh;
+    align-self: flex-start;
+}
+
+@media screen and (min-width: 1200px) {
+.train-left {
+  
+        height: 50vh;
+    }
+
+    .train-right {
+   
+        height: 50vh;
+   
+    }
 }
