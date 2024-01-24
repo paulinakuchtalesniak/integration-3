@@ -22,7 +22,7 @@
 
     /* colors */
     --color-primary: #F0F0F0;
-   
+
     --color-body-copy-dark: #47515A;
     --color-dark-blue: #256CB0;
     --color-light-blue: #56A2E9;
@@ -1317,14 +1317,15 @@ header {
 
 /* SECTION 5 */
 
-.ticket__description{
+.ticket__description {
     display: none;
     min-height: 10vh;
     color: #256CB0;
 }
+
 .section-fifth {
     padding-bottom: var(--space-2xl);
-        background-color: var(--color-primary);
+    background-color: var(--color-primary);
 }
 
 .scanned-ticket__heading--desktop {
@@ -1528,7 +1529,7 @@ header {
     .scanned-ticked__back {
         display: none;
     }
-   
+
 
 }
 
@@ -1544,11 +1545,13 @@ header {
     gap: var(--space-3xl);
     overflow-x: hidden;
 }
-.train-left{
+
+.train-left {
     transform: translateX(30%);
     height: 30vh;
     align-self: flex-end;
 }
+
 .train-right {
     transform: translateX(-70%);
     height: 30vh;
@@ -1556,14 +1559,19 @@ header {
 }
 
 @media screen and (min-width: 1200px) {
-.train-left {
-  
+    .train-left {
+
         height: 50vh;
     }
 
     .train-right {
-   
+
         height: 50vh;
-   
+
     }
+}
+
+.section-seventh {
+    background-color: var(--color-primary-yellow);
+    min-height: 100vh;
 }
