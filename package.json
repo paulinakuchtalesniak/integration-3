@@ -1,0 +1,14 @@
+{
+  "name": "integration-3",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --base=/integration3/",
+    "build": "vite build --base=/integration3/",
+    "preview": "vite preview --base=/integration3/"
+  },
+  "devDependencies": {
+    "vite": "^5.0.8"
+  }
+}
