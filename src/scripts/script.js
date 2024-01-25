@@ -1,40 +1,40 @@
 import "../styles/reset.css";
 import "../styles/style.css";
 
-gsap.registerPlugin(ScrollTrigger);
+// gsap.registerPlugin(ScrollTrigger);
 
-const getSectionHeight = () => {
-  const section = document.querySelector(".second-section");
-  return section.clientHeight;
-};
+// const getSectionHeight = () => {
+//   const section = document.querySelector(".second-section");
+//   return section.clientHeight;
+// };
 
-function setupAnimations() {
-  const sectionHeight = getSectionHeight();
-  gsap.to(".moving-circle", {
-    scrollTrigger: {
-      trigger: ".second-section",
-      start: "top 20%",
-      end: "bottom center",
-      scrub: 0.4,
-      // markers: true,
-    },
-    y: sectionHeight,
-    ease: "none",
-  });
+// function setupAnimations() {
+//   const sectionHeight = getSectionHeight();
+//   gsap.to(".moving-circle", {
+//     scrollTrigger: {
+//       trigger: ".second-section",
+//       start: "top 20%",
+//       end: "bottom center",
+//       scrub: 0.4,
+//       // markers: true,
+//     },
+//     y: sectionHeight,
+//     ease: "none",
+//   });
 
-  gsap.to(".noopacity-timeline rect", {
-    scrollTrigger: {
-      trigger: ".second-section",
-      start: "top 20%",
-      end: "bottom center",
-      scrub: 0.4,
-    },
-    width: sectionHeight,
-    ease: "none",
-  });
-}
+//   gsap.to(".noopacity-timeline rect", {
+//     scrollTrigger: {
+//       trigger: ".second-section",
+//       start: "top 20%",
+//       end: "bottom center",
+//       scrub: 0.4,
+//     },
+//     width: sectionHeight,
+//     ease: "none",
+//   });
+// }
 
-setupAnimations();
+// setupAnimations();
 
 // Resize event
 window.addEventListener("resize", () => {
@@ -87,5 +87,20 @@ if (window.innerWidth < 1200) {
 
   document.querySelectorAll(".scanned-ticket").forEach((section) => {
     section.addEventListener("click", () => updateDescription(section));
+  });
+}
+
+const accordeonParts = document.querySelectorAll(".accordion__btn");
+let i;
+
+for (i = 0; i < accordeonParts.length; i++) {
+  accordeonParts[i].addEventListener("click", function () {
+    this.classList.toggle("active");
+    let panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    }
   });
 }
