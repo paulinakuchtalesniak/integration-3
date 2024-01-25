@@ -1,40 +1,40 @@
 import "../styles/reset.css";
 import "../styles/style.css";
 
-// gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger);
 
-// const getSectionHeight = () => {
-//   const section = document.querySelector(".second-section");
-//   return section.clientHeight;
-// };
+const getSectionHeight = () => {
+  const section = document.querySelector(".second-section");
+  return section.clientHeight;
+};
 
-// function setupAnimations() {
-//   const sectionHeight = getSectionHeight();
-//   gsap.to(".moving-circle", {
-//     scrollTrigger: {
-//       trigger: ".second-section",
-//       start: "top 20%",
-//       end: "bottom center",
-//       scrub: 0.4,
-//       // markers: true,
-//     },
-//     y: sectionHeight,
-//     ease: "none",
-//   });
+function setupAnimations() {
+  const sectionHeight = getSectionHeight();
+  gsap.to(".moving-circle", {
+    scrollTrigger: {
+      trigger: ".second-section",
+      start: "top 20%",
+      end: "bottom center",
+      scrub: 0.4,
+      // markers: true,
+    },
+    y: sectionHeight,
+    ease: "none",
+  });
 
-//   gsap.to(".noopacity-timeline rect", {
-//     scrollTrigger: {
-//       trigger: ".second-section",
-//       start: "top 20%",
-//       end: "bottom center",
-//       scrub: 0.4,
-//     },
-//     width: sectionHeight,
-//     ease: "none",
-//   });
-// }
+  gsap.to(".noopacity-timeline rect", {
+    scrollTrigger: {
+      trigger: ".second-section",
+      start: "top 20%",
+      end: "bottom center",
+      scrub: 0.4,
+    },
+    width: sectionHeight,
+    ease: "none",
+  });
+}
 
-// setupAnimations();
+setupAnimations();
 
 // Resize event
 window.addEventListener("resize", () => {
@@ -104,3 +104,17 @@ for (i = 0; i < accordeonParts.length; i++) {
     }
   });
 }
+
+let sections = gsap.utils.toArray(".horizontal-scroll__panel");
+
+gsap.to(sections, {
+  xPercent: -100 * (sections.length - 1),
+  ease: "none",
+  scrollTrigger: {
+    trigger: ".section-eleventh",
+    pin: true,
+    scrub: 1,
+    snap: 1 / (sections.length - 1),
+    end: () => "+=" + document.querySelector(".section-eleventh").offsetWidth,
+  },
+});
