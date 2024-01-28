@@ -8,7 +8,6 @@ const getSectionHeight = () => {
   return section.clientHeight;
 };
 
-
 // PHONE & TABLET TIMELINE
 const setupAnimations = () => {
   const sectionHeight = getSectionHeight();
@@ -78,7 +77,6 @@ const triggerPhotos = () => {
 };
 
 // COMPUTER
-
 
 const handleFlip = (frontElement, backElement) => {
   const wrapper = document.querySelector(".scanned-ticket__wrapper");
@@ -263,15 +261,23 @@ const manipulateLinesDisplay = () => {
   });
 };
 
+let lastWindowWidth = window.innerWidth;
+
 const init = () => {
   gsap.registerPlugin(ScrollTrigger);
   mapAnimation();
   manipulateLinesDisplay();
   getSectionHeight();
   setupAnimations();
+
   window.addEventListener("resize", () => {
-    setupAnimations();
+    const currentWindowWidth = window.innerWidth;
+    if (currentWindowWidth !== lastWindowWidth) {
+      setupAnimations();
+      lastWindowWidth = currentWindowWidth;
+    }
   });
+
   triggerPhotos();
   manipulateTicket();
   createAccordeon();
