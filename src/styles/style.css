@@ -592,6 +592,7 @@ header+.pin-spacer {
 
 .timeline-desktop {
     display: none;
+
 }
 
 .moving-circle--desktop {
@@ -629,6 +630,7 @@ header+.pin-spacer {
     width: 18px;
     justify-self: center;
     background-color: #FCF7F4;
+    border-radius: 5rem;
 }
 
 
@@ -651,6 +653,7 @@ header+.pin-spacer {
     width: 18px;
     justify-self: center;
     background-color: #FCF7F4;
+    border-radius: 5rem;
 }
 
 .moving-circle {
@@ -733,11 +736,12 @@ header+.pin-spacer {
     .second-section {
         display: grid;
         grid-template-columns: 42vw 16vw 42vw;
-        grid-template-rows: 20vh min-content min-content min-content min-content 5vh;
+        grid-template-rows: 5vh min-content min-content min-content min-content 5vh;
         row-gap: var(--space-2xl);
         padding-top: 0;
-        overflow-x: hidden;
+        overflow: hidden;
         padding-top: var(--space-3xl);
+
 
     }
 
@@ -850,10 +854,11 @@ header+.pin-spacer {
         grid-row: 1/7;
         justify-self: center;
         z-index: 2;
+        transform: translateY(-2vh);
     }
 
     .timeline-desktop {
-        height: 5vh;
+        height: 0%;
     }
 
     .timeline-desktop--opacity {

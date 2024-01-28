@@ -3,14 +3,8 @@ import "../styles/style.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const getSectionHeight = () => {
-  const section = document.querySelector(".second-section");
-  return section.clientHeight;
-};
-
 // PHONE & TABLET TIMELINE
 const setupAnimations = () => {
-  const sectionHeight = getSectionHeight();
   let tlTimeline;
 
   tlTimeline = gsap.timeline({
@@ -23,10 +17,10 @@ const setupAnimations = () => {
     },
   });
 
-  // tlTimeline.to(".moving-circle", {
-  //   y: "300vh",
-  //   ease: "none",
-  // });
+  tlTimeline.to(".moving-circle", {
+    y: "+=100",
+    ease: "none",
+  });
 
   tlTimeline.to(
     ".noopacity-timeline",
@@ -50,33 +44,62 @@ const triggerPhotos = () => {
       {
         isxS: "(min-width: 375px)",
         isM: "(min-width: 767px)",
-        isL: "(max-width: 991px)",
+        isL: "(min-width: 991px)",
       },
       (context) => {
         const { conditions } = context;
-        if ((conditions.isxS || conditions.isM) && conditions.isL) {
-          tlTimelineArticle.to(
-            article,
-            {
-              scrollTrigger: {
-                trigger: heading,
-                start: () =>
-                  `top+=${circleHeight} ${conditions.isM ? "30%" : "40%"}`,
-                end: () => `bottom top`,
-                scrub: 0.4,
-                onEnter: () => gsap.to(article, { opacity: 1 }),
-                onLeaveBack: () => gsap.to(article, { opacity: 0 }),
-              },
+
+        tlTimelineArticle.to(
+          article,
+          {
+            scrollTrigger: {
+              trigger: heading,
+              start: () => `top ${conditions.isxS ? "30%" : "40%"}`,
+              end: () => `bottom top`,
+              scrub: 0.4,
+              onEnter: () => gsap.to(article, { opacity: 1 }),
+              onLeaveBack: () => gsap.to(article, { opacity: 0 }),
+              markers: true,
             },
-            0
-          );
-        }
+          },
+          0
+        );
       }
     );
   });
 };
 
 // COMPUTER
+const timelineComputer = () => {
+  let tlDesktop;
+  const element = document.querySelector(".timeline-desktop--opacity");
+  const height = element.clientHeight;
+
+  tlDesktop = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".second-section",
+      start: "top 30%",
+      end: "bottom 60%",
+
+      scrub: 2,
+      // markers: true,
+    },
+  });
+
+  tlDesktop.to(".moving-circle--desktop", {
+    y: height,
+    ease: "none",
+  });
+
+  tlDesktop.to(
+    ".timeline-desktop",
+    {
+      height: height,
+      ease: "none",
+    },
+    0
+  );
+};
 
 const handleFlip = (frontElement, backElement) => {
   const wrapper = document.querySelector(".scanned-ticket__wrapper");
@@ -267,18 +290,10 @@ const init = () => {
   gsap.registerPlugin(ScrollTrigger);
   mapAnimation();
   manipulateLinesDisplay();
-  getSectionHeight();
   setupAnimations();
-
-  window.addEventListener("resize", () => {
-    const currentWindowWidth = window.innerWidth;
-    if (currentWindowWidth !== lastWindowWidth) {
-      setupAnimations();
-      lastWindowWidth = currentWindowWidth;
-    }
-  });
-
   triggerPhotos();
+  timelineComputer();
+  triggerPhotosDesktop();
   manipulateTicket();
   createAccordeon();
   createHorizontalScroll();
