@@ -23,10 +23,10 @@ const setupAnimations = () => {
     },
   });
 
-  tlTimeline.to(".moving-circle", {
-    y: "300vh",
-    ease: "none",
-  });
+  // tlTimeline.to(".moving-circle", {
+  //   y: "300vh",
+  //   ease: "none",
+  // });
 
   tlTimeline.to(
     ".noopacity-timeline rect",
