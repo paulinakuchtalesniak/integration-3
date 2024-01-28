@@ -18,21 +18,22 @@ const setupAnimations = () => {
       trigger: ".second-section",
       start: "top 20%",
       end: "bottom 20%",
-      scrub: 2,
+      scrub: !0,
+      scrub: 1,
       // markers: true,
     },
   });
 
   tlTimeline.to(".moving-circle", {
     y: sectionHeight,
-    ease: "none",
+    ease: Power4.easeOut,
   });
 
   tlTimeline.to(
     ".noopacity-timeline rect",
     {
       width: sectionHeight,
-      ease: "none",
+      ease: Power4.easeOut,
     },
     0
   );
