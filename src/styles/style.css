@@ -586,9 +586,10 @@ header+.pin-spacer {
 
 /* SECTION 2 */
 
-.facts-timeline__article{
+.facts-timeline__article {
     opacity: 0;
 }
+
 .timeline-desktop {
     display: none;
 }
@@ -624,6 +625,10 @@ header+.pin-spacer {
     grid-column: 1;
     opacity: 0.5;
     z-index: 0;
+    height: 100%;
+    width: 18px;
+    justify-self: center;
+    background-color: #FCF7F4;
 }
 
 
@@ -642,6 +647,10 @@ header+.pin-spacer {
     grid-row: 1;
     grid-column: 1;
     justify-self: center;
+    height: 2%;
+    width: 18px;
+    justify-self: center;
+    background-color: #FCF7F4;
 }
 
 .moving-circle {

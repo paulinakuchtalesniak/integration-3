@@ -29,9 +29,9 @@ const setupAnimations = () => {
   // });
 
   tlTimeline.to(
-    ".noopacity-timeline rect",
+    ".noopacity-timeline",
     {
-      width: sectionHeight,
+      height: "100%",
       ease: "none",
     },
     0
