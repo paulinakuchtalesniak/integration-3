@@ -18,7 +18,7 @@ const setupAnimations = () => {
       trigger: ".second-section",
       start: "top 20%",
       end: "bottom 20%",
-      scrub: 0.4,
+      scrub: 2,
       // markers: true,
     },
   });
