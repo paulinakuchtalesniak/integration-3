@@ -54,7 +54,7 @@ const triggerPhotos = () => {
           {
             scrollTrigger: {
               trigger: heading,
-              start: () => `top ${conditions.isxS ? "30%" : "40%"}`,
+              start: () => `top ${conditions.isL ? "43%" : "30%"}`,
               end: () => `bottom top`,
               scrub: 0.4,
               onEnter: () => gsap.to(article, { opacity: 1 }),
@@ -293,7 +293,6 @@ const init = () => {
   setupAnimations();
   triggerPhotos();
   timelineComputer();
-  triggerPhotosDesktop();
   manipulateTicket();
   createAccordeon();
   createHorizontalScroll();

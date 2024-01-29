@@ -543,8 +543,23 @@
         <h3 class="facts-timeline__article-heading">1987</h3>
         <p class="facts-timeline__article-paragraph">The French government decides to build the high-speed line <span
             class="idea__emphasized-span">from Paris to the Channel Tunnel/Belgian border.</span></p>
-        <img class="facts-timeline__article-photo facts-timeline__article-photo--left"
-          src="src/assets/section2//placeholder-photo.png" alt="">
+
+        <picture class="facts-timeline__article-photo facts-timeline__article-photo--left">
+        
+          <source media="(min-width: 1200px)" srcset="public/output/plan-700.avif" type="image/avif">
+          <source media="(min-width: 1200px)" srcset="public/output/plan-700.webp" type="image/webp">
+
+         
+          <source media="(min-width: 500px)" srcset="public/output/plan-500.avif" type="image/avif">
+          <source media="(min-width: 500px)" srcset="public/output/plan-500.webp" type="image/webp">
+
+          <source srcset="public/output/plan-300.avif" type="image/avif">
+          <source srcset="public/output/plan-300.webp" type="image/webp">
+
+        
+          <img src="public/output/plan-700.jpeg" alt="Plan of the HLS - Top view road">
+        </picture>
+
         <img class="facts-timeline__article-illustration" src="" alt="">
       </article>
       <article class="facts-timeline__article facts-timeline__article--right facts-timeline__article--second">
