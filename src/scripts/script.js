@@ -386,16 +386,6 @@ const revealMinister = () => {
     (context) => {
       const { conditions } = context;
       if (conditions.isxxL) {
-        tlMinister = gsap.timeline({
-          scrollTrigger: {
-            trigger: ".idea-map__wrapper",
-            start: "top 9%",
-            end: "bottom +=100vh",
-            scrub: true,
-            pin: ".first-section",
-            // markers: true,
-          },
-        });
       } else if (conditions.isxxxS) {
         tlMinister = gsap.timeline({
           scrollTrigger: {
