@@ -1902,24 +1902,24 @@ header+.pin-spacer {
 
 /* SECTION 6 */
 .section-sixth {
-    padding-top: var(--space-xl);
+    padding-top: var(--space-l);
     background-color: var(--color-primary);
     padding: var(--space-2xl) 0;
     min-height: 10vh;
     display: flex;
     flex-direction: column;
-    gap: var(--space-3xl);
+    gap: var(--space-xl);
     overflow-x: hidden;
 }
 
 .train-left {
-    transform: translateX(30%);
+    transform: translateX(100%);
     height: 30vh;
     align-self: flex-end;
 }
 
 .train-right {
-    transform: translateX(-70%);
+    transform: translateX(-100%);
     height: 30vh;
     align-self: flex-start;
 }
@@ -2016,7 +2016,7 @@ header+.pin-spacer {
     align-self: center;
     text-transform: uppercase;
     font-family: var(--heading-font);
-    font-size: var(--step-1);
+    font-size: var(--step-0);
     color: var(--body-copy-font);
 
 }
