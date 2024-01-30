@@ -1,31 +1,33 @@
 import "../styles/reset.css";
 import "../styles/style.css";
 
-gsap.registerPlugin(ScrollTrigger);
+let currentSectionIndex = 0;
+const sections = document.querySelectorAll(".opinion__section");
 
 // PHONE & TABLET TIMELINE
 const setupAnimations = () => {
   let tlTimeline;
-
+  const element = document.querySelector(".opacity-timeline");
+  const height = element.clientHeight;
   tlTimeline = gsap.timeline({
     scrollTrigger: {
       trigger: ".second-section",
       start: "top 20%",
-      end: "bottom 20%",
-      scrub: 1,
+      end: "bottom 40%",
+      scrub: 2,
       // markers: true,
     },
   });
 
   tlTimeline.to(".moving-circle", {
-    y: "+=100",
+    y: height - 10,
     ease: "none",
   });
 
   tlTimeline.to(
     ".noopacity-timeline",
     {
-      height: "100%",
+      height: height,
       ease: "none",
     },
     0
@@ -54,12 +56,12 @@ const triggerPhotos = () => {
           {
             scrollTrigger: {
               trigger: heading,
-              start: () => `top ${conditions.isL ? "43%" : "30%"}`,
+              start: () => `top ${conditions.isL ? "35%" : "30%"}`,
               end: () => `bottom top`,
               scrub: 0.4,
               onEnter: () => gsap.to(article, { opacity: 1 }),
               onLeaveBack: () => gsap.to(article, { opacity: 0 }),
-              markers: true,
+              // markers: true,
             },
           },
           0
@@ -284,18 +286,150 @@ const manipulateLinesDisplay = () => {
   });
 };
 
-let lastWindowWidth = window.innerWidth;
+const moveBulb = () => {
+  let tlBulb;
+
+  tlBulb = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".first-section",
+      start: "top 10%",
+      end: "center center",
+
+      // markers: true,
+    },
+  });
+
+  tlBulb
+    .from(".idea-section__illustration", {
+      x: "100vw",
+      duration: 1,
+    })
+    .fromTo(
+      ".map-bulb",
+      { rotation: -10, transformOrigin: "50% 50%" },
+      {
+        rotation: 10,
+        duration: 1.5,
+        yoyo: true,
+        repeat: 2,
+        transformOrigin: "50% bottom",
+        ease: "power1.inOut",
+      }
+    )
+    .to(
+      ".map-bulb",
+      {
+        x: "-20%",
+      },
+      0
+    );
+};
+
+const showSection = (index) => {
+  sections.forEach((section, i) => {
+    const paragraphs = section.querySelectorAll("p");
+
+    if (i === index) {
+      section.style.display = "grid";
+      setTimeout(() => {
+        paragraphs.forEach((p) => {
+          p.style.opacity = 1;
+        });
+      }, 200);
+    } else {
+      section.style.display = "none";
+      paragraphs.forEach((p) => {
+        p.style.opacity = 0;
+      });
+    }
+  });
+};
+const addClickEventDispute = () => {
+  document.querySelector(".arrow-left").addEventListener("click", () => {
+    currentSectionIndex = (currentSectionIndex + 1) % sections.length;
+    showSection(currentSectionIndex);
+  });
+
+  document.querySelector(".arrow-right").addEventListener("click", () => {
+    currentSectionIndex =
+      (currentSectionIndex - 1 + sections.length) % sections.length;
+    showSection(currentSectionIndex);
+  });
+};
+
+const handleKeyDownDispute = (event) => {
+  if (event.key === "ArrowLeft") {
+    currentSectionIndex =
+      (currentSectionIndex - 1 + sections.length) % sections.length;
+    showSection(currentSectionIndex);
+  } else if (event.key === "ArrowRight") {
+    currentSectionIndex = (currentSectionIndex + 1) % sections.length;
+    showSection(currentSectionIndex);
+  }
+};
+const revealMinister = () => {
+  const path = document.querySelector(`.minister-path`);
+  const mm = gsap.matchMedia();
+  let tlMinister;
+
+  const pathLength = path.getTotalLength();
+  gsap.set(path, {
+    strokeDasharray: pathLength,
+    strokeDashoffset: pathLength,
+  });
+
+  mm.add(
+    {
+      isxxxS: "(min-width: 375px)",
+      isxxL: "(min-width: 1100px)",
+    },
+    (context) => {
+      const { conditions } = context;
+      if (conditions.isxxL) {
+      } else if (conditions.isxxxS) {
+        tlMinister = gsap.timeline({
+          scrollTrigger: {
+            trigger: ".section-four",
+            start: "top 3%",
+            end: "bottom top",
+            scrub: true,
+            pin: ".section-four",
+            markers: true,
+          },
+        });
+      }
+    }
+  );
+  tlMinister
+    .to(path, {
+      strokeDashoffset: 0,
+    })
+    .from(".government-text__heading", {
+      opacity: 0,
+      duration: 0.2,
+    })
+    .from(".government-text__paragraph", {
+      x: "-100vw",
+    });
+};
 
 const init = () => {
   gsap.registerPlugin(ScrollTrigger);
+  moveBulb();
   mapAnimation();
   manipulateLinesDisplay();
   setupAnimations();
   triggerPhotos();
   timelineComputer();
+  if (window.innerWidth > 768) {
+    showSection(currentSectionIndex);
+    document.addEventListener("keydown", handleKeyDownDispute);
+  }
+  addClickEventDispute();
   manipulateTicket();
   createAccordeon();
   createHorizontalScroll();
+  revealMinister();
 };
 
 init();
