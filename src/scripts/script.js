@@ -56,9 +56,9 @@ const triggerPhotos = () => {
           {
             scrollTrigger: {
               trigger: heading,
-              start: () => `top ${conditions.isL ? "35%" : "30%"}`,
+              start: () => `top ${conditions.isL ? "41%" : "30%"}`,
               end: () => `bottom top`,
-              scrub: 0.4,
+              // scrub: 0.4,
               onEnter: () => gsap.to(article, { opacity: 1 }),
               onLeaveBack: () => gsap.to(article, { opacity: 0 }),
               // markers: true,
@@ -80,16 +80,15 @@ const timelineComputer = () => {
   tlDesktop = gsap.timeline({
     scrollTrigger: {
       trigger: ".second-section",
-      start: "top 30%",
+      start: "top 35%",
       end: "bottom 60%",
-
-      scrub: 2,
-      // markers: true,
+      scrub: 1.2,
+      markers: true,
     },
   });
 
   tlDesktop.to(".moving-circle--desktop", {
-    y: height,
+    y: height - 40,
     ease: "none",
   });
 
@@ -126,32 +125,31 @@ const manipulateTicket = () => {
       frontItem.addEventListener("click", handleFlip(frontItem, backItem));
       backItem.addEventListener("click", handleFlip(frontItem, backItem));
     });
-  } else {
-    const updateDescription = (clickedSection) => {
-      console.log(clickedSection);
-      const name = clickedSection.getAttribute("data-name");
-
-      const correspondingDescription = document.querySelector(
-        `.ticket__description[data-name="${name}"]`
-      );
-      console.log(correspondingDescription);
-
-      document
-        .querySelectorAll(".ticket__description")
-        .forEach((description) => {
-          if (description === correspondingDescription) {
-            console.log("yes");
-            description.style.display = "block";
-          } else {
-            description.style.display = "none";
-          }
-        });
-    };
-
-    document.querySelectorAll(".scanned-ticket").forEach((section) => {
-      section.addEventListener("click", () => updateDescription(section));
-    });
   }
+};
+
+const updateDescription = (clickedSection) => {
+  console.log(clickedSection);
+  const name = clickedSection.getAttribute("data-name");
+  const sections = document.querySelectorAll(".scanned-ticket");
+  const correspondingDescription = document.querySelector(
+    `.ticket__description[data-name="${name}"]`
+  );
+  sections.forEach((section) => {
+    section.style.opacity = "1";
+    if (section != clickedSection) {
+      section.style.opacity = "0.5";
+    }
+  });
+
+  document.querySelectorAll(".ticket__description").forEach((description) => {
+    if (description === correspondingDescription) {
+      console.log("yes");
+      description.style.display = "grid";
+    } else {
+      description.style.display = "none";
+    }
+  });
 };
 
 const createAccordeon = () => {
@@ -226,7 +224,7 @@ const mapAnimation = () => {
             trigger: ".idea-map__wrapper",
             start: "top 20%",
             end: "bottom +=100vh",
-            scrub: true,
+            scrub: 0.7,
             pin: ".first-section",
             // markers: true,
           },
@@ -369,6 +367,7 @@ const handleKeyDownDispute = (event) => {
 };
 const revealMinister = () => {
   const path = document.querySelector(`.minister-path`);
+  const pathSecond = document.querySelector(`.minister-path--second`);
   const mm = gsap.matchMedia();
   let tlMinister;
 
@@ -378,39 +377,62 @@ const revealMinister = () => {
     strokeDashoffset: pathLength,
   });
 
+  const pathLengthSecond = pathSecond.getTotalLength();
+  gsap.set(pathSecond, {
+    strokeDasharray: pathLengthSecond,
+    strokeDashoffset: pathLengthSecond,
+  });
+
   mm.add(
     {
       isxxxS: "(min-width: 375px)",
+      isM: "(min-width: 992px)",
       isxxL: "(min-width: 1100px)",
     },
     (context) => {
       const { conditions } = context;
-      if (conditions.isxxL) {
-      } else if (conditions.isxxxS) {
-        tlMinister = gsap.timeline({
-          scrollTrigger: {
-            trigger: ".section-four",
-            start: "top 3%",
-            end: "bottom top",
-            scrub: true,
-            pin: ".section-four",
-            markers: true,
+
+      tlMinister = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".section-four",
+          start: "top 3%",
+          end: "bottom top",
+          scrub: 1,
+          pin: ".section-four",
+          markers: true,
+        },
+      });
+
+      tlMinister
+        .to(path, {
+          strokeDashoffset: 0,
+        })
+        .from(".government-text__heading", {
+          opacity: 0,
+          duration: 0.2,
+        })
+        .from(".government-text__paragraph", {
+          x: "-100vw",
+        })
+        .from(
+          ".government__minister-photo",
+          {
+            x: "100vw",
           },
+          "<"
+        )
+        .from(".government__map-photo", {
+          x: "50vw",
+          y: `${conditions.isM ? "150vh" : "50vh"}`,
+          scale: 0,
+        });
+      if (conditions.isM) {
+        tlMinister.to(pathSecond, {
+          strokeDashoffset: 0,
         });
       }
     }
   );
-  tlMinister
-    .to(path, {
-      strokeDashoffset: 0,
-    })
-    .from(".government-text__heading", {
-      opacity: 0,
-      duration: 0.2,
-    })
-    .from(".government-text__paragraph", {
-      x: "-100vw",
-    });
 };
 
 const init = () => {
@@ -428,8 +450,13 @@ const init = () => {
   addClickEventDispute();
   manipulateTicket();
   createAccordeon();
-  createHorizontalScroll();
   revealMinister();
+  if (window.innerWidth > 1200) {
+    document.querySelectorAll(".scanned-ticket").forEach((section) => {
+      section.addEventListener("click", () => updateDescription(section));
+    });
+  }
+  createHorizontalScroll();
 };
 
 init();

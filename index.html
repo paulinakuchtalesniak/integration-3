@@ -867,7 +867,7 @@
       <div class="government-photos__wrapper">
         <dotlottie-player class="government__map-photo"
           src="https://lottie.host/653c2911-a026-4a59-b655-2a9e1e38b1ce/V73iKvBvTX.json" background="transparent"
-          speed="0.5" style="width: 300px; height: 300px;" loop autoplay></dotlottie-player>
+          speed="0.5" loop autoplay></dotlottie-player>
         <img class="government__minister-photo" src="src/assets/section3/prime-minister.png" alt="">
 
       </div>
@@ -884,7 +884,7 @@
           </style>
         </defs>
         <g id="Layer_1-2" data-name="Layer 1">
-          <path class="cls-1" d="M8,.04c.37,69.52.74,139.05,1.11,208.57" />
+          <path class="cls-1 minister-path--second" d="M8,.04c.37,69.52.74,139.05,1.11,208.57" />
         </g>
       </svg>
     </section>
@@ -933,7 +933,7 @@
                 international connectivity</span> and infrastructure modernization.</p>
           </div>
         </section>
-        <section class="scanned-ticket scanned-ticket--third">
+        <section data-name="3" class="scanned-ticket scanned-ticket--third">
 
           <div class="scanned-ticked__front">
             <img class="scanned-ticked__front-svg" src="src/assets/svg/card-ticket.svg" alt="">
@@ -951,7 +951,7 @@
               major cities and neighboring countries, focusing on economic growth.</p>
           </div>
         </section>
-        <section class="scanned-ticket scanned-ticket--fourth">
+        <section data-name="4" class="scanned-ticket scanned-ticket--fourth">
 
           <div class="scanned-ticked__front">
             <img class="scanned-ticked__front-svg" src="src/assets/svg/card-ticket.svg" alt="">
@@ -969,7 +969,7 @@
               landscapes due to the construction of new railway lines.</p>
           </div>
         </section>
-        <section class="scanned-ticket scanned-ticket--fifth">
+        <section data-name="5" class="scanned-ticket scanned-ticket--fifth">
 
           <div class="scanned-ticked__front">
             <img class="scanned-ticked__front-svg" src="src/assets/svg/card-ticket.svg" alt="">
@@ -988,23 +988,64 @@
         </section>
       </div>
       <div class="desktop-tickets__wrapper">
+
         <div data-name="1" class="ticket__description ticket__description--first">
-          <h3 class="scanned-ticked__front-heaading--desktop">Public Concerns<br> Card</h3>
+          <div class="scanned-ticked__heaading-wrapper">
+            <h3 class="scanned-ticked__front-heaading--desktop">Public Concerns Card</h3>
+            <img class="scanned-ticked__front-icon--desktop" src="src/assets/svg/public-concerns.svg" alt="">
+          </div>
           <p class="scanned-ticked__back-paragraph--desktop">The high-speed train project <span
               class="idea__emphasized-span">faced public
               criticism as 'totally unnecessary' and 'harmful to
               the
               environment.'</span> Concerns
             were raised about its high cost and perceived elitist nature.</p>
+
         </div>
         <div data-name="2" class="ticket__description ticket__description--second">
-          <h3 class="scanned-ticked__front-heaading--desktop">Economic Benefits<br> Card</h3>
+          <div class="scanned-ticked__heaading-wrapper">
+            <h3 class="scanned-ticked__front-heaading--desktop">Economic Benefits Card</h3>
+            <img class="scanned-ticked__front-icon--desktop" src="src/assets/svg/economic-benefits.svg" alt="">
+          </div>
           <p class="scanned-ticked__back-paragraph--desktop">The <span class="idea__emphasized-span">government
               advocated for
               the HSL </span> by emphasizing the expected <span class="idea__emphasized-span">economic
               benefits, including improved national and
               international connectivity</span> and infrastructure modernization.</p>
         </div>
+        <div data-name="3" class="ticket__description ticket__description--third">
+          <div class="scanned-ticked__heaading-wrapper">
+            <h3 class="scanned-ticked__front-heaading--desktop">Government Vision Card</h3>
+            <img class="scanned-ticked__front-icon--desktop" src="src/assets/svg/government.svg" alt="">
+          </div>
+          <p class="scanned-ticked__back-paragraph--desktop">The government, led by Transport Minister Herman De Croo in
+            1986,<span class="idea__emphasized-span"> planned for the HSL to traverse
+              Belgium,</span> connecting to
+            major cities and neighboring countries, focusing on economic growth.</p>
+        </div>
+        <div data-name="4" class="ticket__description ticket__description--fourth">
+          <div class="scanned-ticked__heaading-wrapper">
+            <h3 class="scanned-ticked__front-heaading--desktop">Environmental Card</h3>
+            <img class="scanned-ticked__front-icon--desktop" src="src/assets/svg/environment.svg" alt="">
+          </div>
+          <p class="scanned-ticked__back-paragraph--desktop">Critics of the HST <span
+              class="idea__emphasized-span">highlighted
+              potential environmental damages,</span>
+            emphasizing the disruption to natural and urban
+            landscapes due to the construction of new railway lines.</p>
+        </div>
+        <div data-name="5" class="ticket__description ticket__description--fifth">
+          <div class="scanned-ticked__heaading-wrapper">
+
+            <h3 class="scanned-ticked__front-heaading--desktop">Compromise Card</h3>
+            <img class="scanned-ticked__front-icon--desktop" src="src/assets/svg/solution.svg" alt="">
+          </div>
+          <p class="scanned-ticked__back-paragraph--desktop">A compromise was reached where, except for the
+            Antwerp-Dutch
+            border section, Flanders<span class="idea__emphasized-span"></span> would not construct new lines but
+            adapt existing ones, </span>balancing high-speed and domestic rail needs.</p>
+        </div>
+
 
     </section>
     <section class="section-sixth">
