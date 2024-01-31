@@ -398,7 +398,7 @@ const revealMinister = () => {
           end: "bottom top",
           scrub: 1,
           pin: ".section-four",
-          markers: true,
+          // markers: true,
         },
       });
 
@@ -471,9 +471,9 @@ const moveTrains = () => {
   );
 };
 
-const countToNumber = (element, endValue) => {
+const countToNumber = (element, endValue, lenght) => {
   let startValue = 0;
-  let duration = 1000;
+  let duration = lenght;
   let current = startValue;
   const stepTime = duration / endValue;
 
@@ -485,14 +485,13 @@ const countToNumber = (element, endValue) => {
     }
   }, stepTime);
 };
-
+// PHONE/TABLET
 const displayKm = () => {
   const mm = gsap.matchMedia();
-
   mm.add(
     {
       isxxS: "(min-width: 375px)",
-      isxL: "(min-width: 1080px)",
+      isxL: "(max-width: 990px)",
     },
     (context) => {
       const { conditions } = context;
@@ -500,32 +499,13 @@ const displayKm = () => {
       gsap.utils.toArray(".plate__distance").forEach((section) => {
         let kmSpan = section.querySelector(".plate__distance-km--span");
         if (kmSpan) {
-          console.log("here");
           let endValue = parseInt(kmSpan.dataset.number, 10);
-          let counter = { val: 0 };
-          if (conditions.isxL) {
-            gsap.to(counter, {
-              val: endValue,
-              ease: "none",
-              scrollTrigger: {
-                trigger: ".connections-plates__wrapper",
-                start: "top top",
-                end: "bottom top",
-                scrub: true,
-                markers: true,
-                pin: ".connections-plates__wrapper",
-                onUpdate: () => {
-                  kmSpan.textContent = counter.val.toFixed(1);
-                },
-              },
-            });
-          } else if (conditions.isxxS) {
+          if (conditions.isxxS && conditions.isxL) {
             gsap.to(kmSpan, {
               scrollTrigger: {
                 trigger: section,
                 start: "top center",
-                onEnter: () => countToNumber(kmSpan, endValue),
-                // onEnterBack: () => countToNumber(kmSpan, endValue), 
+                onEnter: () => countToNumber(kmSpan, endValue, 1000),
                 once: true,
                 // markers: true,
               },
@@ -535,6 +515,120 @@ const displayKm = () => {
       });
     }
   );
+};
+
+const revealLineTrainsDesktop = () => {
+  const trainPath = document.querySelector(`.train-path`);
+  const pathLengtTrain = trainPath.getTotalLength();
+  gsap.set(trainPath, {
+    strokeDasharray: pathLengtTrain,
+    strokeDashoffset: pathLengtTrain,
+  });
+
+  const tlTrainLenght = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".section-seventh",
+      start: "top 40%",
+      end: "top 20%",
+      scrub: 1,
+      // markers: true,
+    },
+  });
+
+  tlTrainLenght.to(trainPath, {
+    strokeDashoffset: 0,
+  });
+};
+
+const displayKmDesktop = () => {
+  const mm = gsap.matchMedia();
+  const dots = gsap.utils.toArray(".connections-dot");
+  const kmSpans = gsap.utils.toArray(".plate__distance-km--span");
+  let tlTrains;
+  mm.add(
+    {
+      isL: "(min-width: 991px)",
+    },
+    (context) => {
+      const { conditions } = context;
+      if (conditions.isL) {
+        tlTrains = gsap.timeline({
+          scrollTrigger: {
+            trigger: ".connections-plates__wrapper",
+            start: "top 20%",
+            end: "bottom top",
+            // markers: true,
+            toggleActions: "play pause reset reset",
+          },
+        });
+      }
+
+      const staggerTime = 1;
+      dots.forEach((dot, index) => {
+        let kmSpan = kmSpans[index];
+        if (kmSpan) {
+          let endValue = parseInt(kmSpan.dataset.number, 10);
+          let dotHeight = dot.dataset.height || "10vh";
+          tlTrains.to(
+            dot,
+            {
+              y: dotHeight,
+              duration: 2,
+              onStart: () => countToNumber(kmSpan, endValue, 2000),
+            },
+            index * staggerTime
+          );
+        }
+      });
+    }
+  );
+};
+
+const achievmentSection = () => {
+  const textParagraphs = document.querySelectorAll(
+    `.achievment-plate__paragraph`
+  );
+  const badgesText = document.querySelectorAll(`.achievment-badge`);
+
+  const mm = gsap.matchMedia();
+  let tlAchievment;
+
+  mm.add(
+    {
+      isxxxS: "(min-width: 375px)",
+      isxxL: "(min-width: 1100px)",
+    },
+    (context) => {
+      const { conditions } = context;
+      if (conditions.isxxL) {
+        // tlAchievment = gsap.timeline({
+        //   scrollTrigger: {
+        //     trigger: ".idea-map__wrapper",
+        //     start: "top 9%",
+        //     end: "bottom +=100vh",
+        //     scrub: true,
+        //     pin: ".first-section",
+        //     // markers: true,
+        //   },
+        // });
+      } else if (conditions.isxxxS) {
+        tlAchievment = gsap.timeline({
+          scrollTrigger: {
+            trigger: ".section-eight",
+            start: "top 20%",
+            end: "bottom +=100vh",
+            scrub: 0.7,
+            pin: ".section-eight",
+            // markers: true,
+          },
+        });
+      }
+    }
+  );
+  tlAchievment.from(textParagraphs, {
+    opacity: 0,
+    stagger: 0.5,
+  });
 };
 
 const init = () => {
@@ -558,9 +652,13 @@ const init = () => {
       section.addEventListener("click", () => updateDescription(section));
     });
   }
-  createHorizontalScroll();
+
   moveTrains();
   displayKm();
+  revealLineTrainsDesktop();
+  displayKmDesktop();
+  achievmentSection();
+  createHorizontalScroll();
 };
 
 init();
