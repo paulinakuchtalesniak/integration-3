@@ -588,7 +588,16 @@ const achievmentSection = () => {
   const textParagraphs = document.querySelectorAll(
     `.achievment-plate__paragraph`
   );
-  const badgesText = document.querySelectorAll(`.achievment-badge`);
+  const paths = document.querySelectorAll(`.stroke-red`);
+  const cityDots = document.querySelectorAll(`.city-dot`);
+  const cityNames = document.querySelectorAll(`.text-city`);
+  paths.forEach((path) => {
+    const pathLength = path.getTotalLength();
+    gsap.set(path, {
+      strokeDasharray: pathLength,
+      strokeDashoffset: pathLength,
+    });
+  });
 
   const mm = gsap.matchMedia();
   let tlAchievment;
@@ -596,38 +605,163 @@ const achievmentSection = () => {
   mm.add(
     {
       isxxxS: "(min-width: 375px)",
-      isxxL: "(min-width: 1100px)",
+      isxxL: "(min-width: 1000px)",
     },
     (context) => {
       const { conditions } = context;
-      if (conditions.isxxL) {
-        // tlAchievment = gsap.timeline({
-        //   scrollTrigger: {
-        //     trigger: ".idea-map__wrapper",
-        //     start: "top 9%",
-        //     end: "bottom +=100vh",
-        //     scrub: true,
-        //     pin: ".first-section",
-        //     // markers: true,
-        //   },
-        // });
-      } else if (conditions.isxxxS) {
+      if (conditions.isxxxS || conditions.isxxL) {
         tlAchievment = gsap.timeline({
           scrollTrigger: {
             trigger: ".section-eight",
-            start: "top 20%",
-            end: "bottom +=100vh",
+            start: "top top",
+            end: "bottom -=500vh",
             scrub: 0.7,
             pin: ".section-eight",
-            // markers: true,
+            markers: true,
           },
         });
+        if (conditions.isxxL) {
+          const pathHeading = document.querySelector(`.achievment-path`);
+          const pathLength = pathHeading.getTotalLength();
+          gsap.set(pathHeading, {
+            strokeDasharray: pathLength,
+            strokeDashoffset: pathLength,
+          });
+
+          tlAchievment.to(pathHeading, {
+            strokeDashoffset: 0,
+            duration: 1,
+          });
+        }
+        tlAchievment.to(
+          ".achievments-first-line",
+          {
+            display: "block",
+          },
+          "<0.03"
+        );
+        tlAchievment.fromTo(
+          textParagraphs[0],
+          { autoAlpha: 0 },
+          { autoAlpha: 1, duration: 1 }
+        );
+        tlAchievment.fromTo(
+          document.querySelector('.achievment-badge[data-connection="badge1"]'),
+          { autoAlpha: 0 },
+          { autoAlpha: 1, duration: 1 },
+          "<"
+        );
+
+        textParagraphs.forEach((paragraph, index) => {
+          if (index === 0) return;
+          const connection = paragraph.dataset.connection;
+          const correspondingBadge = connection
+            ? document.querySelector(
+                `.achievment-badge[data-connection="${connection}"]`
+              )
+            : null;
+
+          tlAchievment.to(
+            textParagraphs[index - 1],
+            { autoAlpha: 0, duration: 1 },
+            `+=0.5`
+          );
+
+          tlAchievment.fromTo(
+            paragraph,
+            { autoAlpha: 0 },
+            { autoAlpha: 1, duration: 1 },
+            "<"
+          );
+
+          if (correspondingBadge) {
+            tlAchievment.fromTo(
+              correspondingBadge,
+              { autoAlpha: 0 },
+              { autoAlpha: 1, duration: 1 },
+              "<0.3"
+            );
+          }
+        });
+        tlAchievment.to(
+          paths,
+          {
+            strokeDashoffset: 0,
+            stagger: 0.4,
+            duration: 10,
+          },
+          0
+        );
+        tlAchievment.from(
+          cityDots,
+          {
+            opacity: 0,
+            stagger: 0.4,
+            duration: 0.4,
+          },
+          "<6"
+        );
+
+        tlAchievment.from(
+          cityNames,
+          {
+            opacity: 0,
+            stagger: 0.4,
+            duration: 0.4,
+          },
+          "<0.2"
+        );
+        if (conditions.isxxL) {
+          cityDots.forEach((dot) => {
+            gsap.to(dot, {
+              scale: 1.2,
+              duration: 1.3,
+              ease: "power1.inOut",
+              repeat: -1,
+              yoyo: true,
+              transformOrigin: "center center",
+            });
+          });
+        }
       }
     }
   );
-  tlAchievment.from(textParagraphs, {
-    opacity: 0,
-    stagger: 0.5,
+};
+
+const addHoverToCityDots = () => {
+  const cityDots = document.querySelectorAll(".city-dot");
+  const photosStations = document.querySelectorAll(".station-photo");
+
+  cityDots.forEach((dot) => {
+    dot.addEventListener("mouseover", () => {
+      if (dot.style.opacity > 0) {
+        const cityName = dot.getAttribute("data-city-name");
+        console.log(dot.style.opacity);
+        const correspondingPhoto = Array.from(photosStations).find(
+          (photo) => photo.getAttribute("data-city-name") === cityName
+        );
+        if (correspondingPhoto) {
+          correspondingPhoto.style.display = "block";
+
+          const dotBox = dot.getBoundingClientRect();
+          console.log(dotBox);
+          correspondingPhoto.style.transform = `translate(${
+            dotBox.x + dotBox.width
+          }px, ${-dotBox.y}px)`;
+        }
+      }
+    });
+
+    dot.addEventListener("mouseleave", () => {
+      const cityName = dot.getAttribute("data-city-name");
+      const correspondingPhoto = Array.from(photosStations).find(
+        (photo) => photo.getAttribute("data-city-name") === cityName
+      );
+
+      if (correspondingPhoto) {
+        correspondingPhoto.style.display = "none";
+      }
+    });
   });
 };
 
@@ -658,6 +792,7 @@ const init = () => {
   revealLineTrainsDesktop();
   displayKmDesktop();
   achievmentSection();
+  addHoverToCityDots();
   createHorizontalScroll();
 };
 
