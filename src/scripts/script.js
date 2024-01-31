@@ -528,10 +528,10 @@ const revealLineTrainsDesktop = () => {
   const tlTrainLenght = gsap.timeline({
     scrollTrigger: {
       trigger: ".section-seventh",
-      start: "top 40%",
-      end: "top 20%",
+      start: "top 50%",
+      end: "top top",
       scrub: 1,
-      // markers: true,
+      markers: true,
     },
   });
 
@@ -614,10 +614,10 @@ const achievmentSection = () => {
           scrollTrigger: {
             trigger: ".section-eight",
             start: "top top",
-            end: "bottom -=500vh",
+            end: "bottom top",
             scrub: 0.7,
             pin: ".section-eight",
-            markers: true,
+            // markers: true,
           },
         });
         if (conditions.isxxL) {
