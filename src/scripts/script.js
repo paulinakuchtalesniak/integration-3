@@ -605,7 +605,7 @@ const achievmentSection = () => {
   mm.add(
     {
       isxxxS: "(min-width: 375px)",
-      isxxL: "(min-width: 1000px)",
+      isxxL: "(min-width: 1080px)",
     },
     (context) => {
       const { conditions } = context;
@@ -735,7 +735,7 @@ const addHoverToCityDots = () => {
 
   cityDots.forEach((dot) => {
     dot.addEventListener("mouseover", () => {
-      if (dot.style.opacity > 0 && window.innerWidth > 1000) {
+      if (dot.style.opacity > 0 && window.innerWidth > 1080) {
         const cityName = dot.getAttribute("data-city-name");
         console.log(dot.style.opacity);
         const correspondingPhoto = Array.from(photosStations).find(
@@ -783,6 +783,37 @@ const revealTickets = () => {
   thalisTicket.addEventListener("click", clickedTicket);
 };
 
+const revealMasterPieceLine = () => {
+  const mm = gsap.matchMedia();
+  const pathMasterpiece = document.querySelector(`.masterstroke-path`);
+  const pathLength = pathMasterpiece.getTotalLength();
+  gsap.set(pathMasterpiece, {
+    strokeDasharray: pathLength,
+    strokeDashoffset: pathLength,
+  });
+
+  mm.add(
+    {
+      isxL: "(min-width: 1080px)",
+    },
+    (context) => {
+      const { conditions } = context;
+      if (conditions.isxL) {
+        gsap.to(pathMasterpiece, {
+          strokeDashoffset: 0,
+          scrollTrigger: {
+            trigger: ".section-ninth",
+            start: "top 40%",
+            end: "top top",
+            scrub: 0.7,
+            markers: true,
+          },
+        });
+      }
+    }
+  );
+};
+
 const init = () => {
   gsap.registerPlugin(ScrollTrigger);
   moveBulb();
@@ -813,6 +844,7 @@ const init = () => {
   addHoverToCityDots();
   revealTickets();
   createHorizontalScroll();
+  revealMasterPieceLine();
 };
 
 init();
