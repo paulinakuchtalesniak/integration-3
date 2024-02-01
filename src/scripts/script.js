@@ -144,9 +144,9 @@ const updateDescription = (clickedSection) => {
   document.querySelectorAll(".ticket__description").forEach((description) => {
     if (description === correspondingDescription) {
       console.log("yes");
-      description.style.display = "grid";
+      description.style.opacity = "1";
     } else {
-      description.style.display = "none";
+      description.style.opacity = "0";
     }
   });
 };
@@ -211,7 +211,7 @@ const mapAnimation = () => {
           scrollTrigger: {
             trigger: ".idea-map__wrapper",
             start: "top 9%",
-            end: "bottom +=100vh",
+            end: "bottom top",
             scrub: true,
             pin: ".first-section",
             // markers: true,
@@ -423,7 +423,7 @@ const revealMinister = () => {
         .from(".government__map-photo", {
           x: "50vw",
           y: `${conditions.isM ? "150vh" : "50vh"}`,
-          scale: 0,
+          scale: 0.4,
         });
       if (conditions.isM) {
         tlMinister.to(pathSecond, {
@@ -531,7 +531,7 @@ const revealLineTrainsDesktop = () => {
       start: "top 50%",
       end: "top top",
       scrub: 1,
-      markers: true,
+      // markers: true,
     },
   });
 
@@ -614,10 +614,10 @@ const achievmentSection = () => {
           scrollTrigger: {
             trigger: ".section-eight",
             start: "top top",
-            end: "bottom top",
+            end: "bottom -=600vh",
             scrub: 0.7,
-            pin: ".section-eight",
-            // markers: true,
+            pin: true,
+            markers: true,
           },
         });
         if (conditions.isxxL) {
@@ -632,14 +632,15 @@ const achievmentSection = () => {
             strokeDashoffset: 0,
             duration: 1,
           });
+          tlAchievment.to(
+            ".achievments-first-line",
+            {
+              display: "block",
+            },
+            "<0.03"
+          );
         }
-        tlAchievment.to(
-          ".achievments-first-line",
-          {
-            display: "block",
-          },
-          "<0.03"
-        );
+
         tlAchievment.fromTo(
           textParagraphs[0],
           { autoAlpha: 0 },
@@ -734,7 +735,7 @@ const addHoverToCityDots = () => {
 
   cityDots.forEach((dot) => {
     dot.addEventListener("mouseover", () => {
-      if (dot.style.opacity > 0) {
+      if (dot.style.opacity > 0 && window.innerWidth > 1000) {
         const cityName = dot.getAttribute("data-city-name");
         console.log(dot.style.opacity);
         const correspondingPhoto = Array.from(photosStations).find(
@@ -765,6 +766,23 @@ const addHoverToCityDots = () => {
   });
 };
 
+const clickedTicket = (event) => {
+  event.target.classList.toggle("visible");
+  event.preventDefault();
+};
+
+const revealTickets = () => {
+  const eurostarTicket = document.querySelector(
+    ".masterstroke-phone__ticket-eurostar"
+  );
+  const thalisTicket = document.querySelector(
+    ".masterstroke-phone__ticket-thalis"
+  );
+
+  eurostarTicket.addEventListener("click", clickedTicket);
+  thalisTicket.addEventListener("click", clickedTicket);
+};
+
 const init = () => {
   gsap.registerPlugin(ScrollTrigger);
   moveBulb();
@@ -793,6 +811,7 @@ const init = () => {
   displayKmDesktop();
   achievmentSection();
   addHoverToCityDots();
+  revealTickets();
   createHorizontalScroll();
 };
 
