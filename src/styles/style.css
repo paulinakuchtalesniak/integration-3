@@ -1597,7 +1597,9 @@ header+.pin-spacer {
         margin-top: var(--space-3xl);
         margin-left: var(--space-3xl);
         height: 30vw;
+        width: auto;
     }
+
 
     .government-text__heading {
         padding-top: var(--space-2xs);
@@ -3073,7 +3075,7 @@ header+.pin-spacer {
 
 @media screen and (min-width: 1300px) {
 
-.masterstroke-phone__wrapper {
+    .masterstroke-phone__wrapper {
         display: grid;
         grid-template-columns: 20vw 1fr 10vw 1fr 20vw;
         grid-template-rows: 2fr 0.5fr;
@@ -3370,7 +3372,7 @@ header+.pin-spacer {
 @media screen and (min-width: 1080px) {
 
     .division__heading {
-        padding: var(--space-xl) 0 var(--space-s) var(--space-xl);
+        padding: var(--space-3xl) 0 var(--space-s) var(--space-xl);
 
     }
 
@@ -3391,6 +3393,7 @@ header+.pin-spacer {
     display: grid;
     grid-template-columns: repeat(4, 100vw);
     grid-row: 100vh;
+    overflow-x: hidden;
 }
 
 .modernisation-heading {

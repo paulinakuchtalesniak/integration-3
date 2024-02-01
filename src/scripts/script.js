@@ -181,6 +181,7 @@ const createHorizontalScroll = () => {
       scrub: 1,
       snap: 1 / (sections.length - 1),
       end: () => "+=" + document.querySelector(".section-eleventh").offsetWidth,
+      markers: true,
     },
   });
 };
@@ -617,7 +618,7 @@ const achievmentSection = () => {
             end: "bottom -=600vh",
             scrub: 0.7,
             pin: true,
-            markers: true,
+            // markers: true,
           },
         });
         if (conditions.isxxL) {
@@ -806,7 +807,7 @@ const revealMasterPieceLine = () => {
             start: "top 40%",
             end: "top top",
             scrub: 0.7,
-            markers: true,
+            // markers: true,
           },
         });
       }
