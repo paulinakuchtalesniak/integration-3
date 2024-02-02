@@ -161,6 +161,10 @@ header {
     grid-template-rows: 100%;
 }
 
+.illustration-big__wrapper {
+    display: none;
+}
+
 .header__text-illustration--small {
     grid-row: 1;
     grid-column: 1;

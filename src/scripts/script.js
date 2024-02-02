@@ -864,7 +864,9 @@ const animateRippedTicket = () => {
 
 const init = () => {
   gsap.registerPlugin(ScrollTrigger);
-  animateRippedTicket();
+  if (window.innerWidth > 768) {
+    animateRippedTicket();
+  }
   moveBulb();
   mapAnimation();
   manipulateLinesDisplay();
