@@ -3,6 +3,8 @@ import "../styles/style.css";
 
 let currentSectionIndex = 0;
 const sections = document.querySelectorAll(".opinion__section");
+const hamburger = document.querySelector(".header__hamburger");
+const navList = document.querySelector(".navigation__list");
 
 // PHONE & TABLET TIMELINE
 const setupAnimations = () => {
@@ -861,9 +863,24 @@ const animateRippedTicket = () => {
     },
   });
 };
+const handleSwitchPhoneNav = () => {
+  hamburger.classList.toggle("active");
+
+  if (navList.classList.contains("active")) {
+    navList.classList.add("inactive");
+    setTimeout(() => {
+      navList.classList.remove("active");
+      navList.classList.remove("inactive");
+    }, 400);
+  } else {
+    navList.classList.remove("inactive");
+    navList.classList.add("active");
+  }
+};
 
 const init = () => {
   gsap.registerPlugin(ScrollTrigger);
+  hamburger.addEventListener("click", handleSwitchPhoneNav);
   if (window.innerWidth > 768) {
     animateRippedTicket();
   }
