@@ -181,7 +181,7 @@ const createHorizontalScroll = () => {
       scrub: 1,
       snap: 1 / (sections.length - 1),
       end: () => "+=" + document.querySelector(".section-eleventh").offsetWidth,
-      markers: true,
+      // markers: true,
     },
   });
 };
@@ -814,6 +814,38 @@ const revealMasterPieceLine = () => {
     }
   );
 };
+const moveHorizontalScrollTimeline = () => {
+  gsap.to(".horizontal-scroll__timeline", {
+    width: "98vw",
+    scrollTrigger: {
+      trigger: ".section-eleventh",
+      start: "top top",
+      end: () =>
+        "+=" +
+        (document.querySelector(".section-eleventh").offsetWidth +
+          window.innerWidth),
+      scrub: 0.2,
+      markers: true,
+    },
+  });
+  gsap.to(
+    ".horizontal-scroll__timeline-dot",
+    {
+      x: "97vw",
+      scrollTrigger: {
+        trigger: ".section-eleventh",
+        start: "top top",
+        end: () =>
+          "+=" +
+          (document.querySelector(".section-eleventh").offsetWidth +
+            window.innerWidth),
+        scrub: 0.2,
+        markers: true,
+      },
+    },
+    0
+  );
+};
 
 const init = () => {
   gsap.registerPlugin(ScrollTrigger);
@@ -844,8 +876,9 @@ const init = () => {
   achievmentSection();
   addHoverToCityDots();
   revealTickets();
-  createHorizontalScroll();
   revealMasterPieceLine();
+  createHorizontalScroll();
+  moveHorizontalScrollTimeline();
 };
 
 init();
