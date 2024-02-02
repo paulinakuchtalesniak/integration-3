@@ -1,54 +1,5 @@
 <svg width="1175" height="637" viewBox="0 0 1175 637" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <style>
- .path1 {
-   fill: #F1EAE5;
-   animation: pulsate 2s infinite ease-in-out;
-     transform-origin: center;
-      transform-box: fill-box;
 
- }
- .dot--first{
-    transform-origin: center;
-     animation: moveFirstDot 15s infinite ease-in-out alternate-reverse;
- }
-.dot--second{
-    fill: #F1EAE5;
-         animation: moveSecondtDot 12s infinite ease-in-out alternate;
-
-}
- @keyframes moveFirstDot {
-  0% {
-    transform: translate(0, -30%);
-  }
-  100% {
-    transform: translate(0, 80%);
-  }
-}
-
-@keyframes moveSecondtDot {
-  0% {
-    transform: translate(5vw, 0);
-  }
-  100% {
-    transform: translate(-20vw, 0); 
-  }
-}
-
- @keyframes pulsate {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.1); /* Increase the scale */
-    opacity: 0.3; /* Adjust opacity */
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-  </style>
 <mask id="mask0_382_1338" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="892" y="73" width="175" height="490">
 <path d="M892.53 73.8063L1044.98 73.7976C1056.8 73.7937 1066.38 83.3827 1066.38 95.2167L1066.36 541.546C1066.36 553.38 1056.77 562.971 1044.95 562.965L892.52 562.975L892.53 73.8063Z" fill="white"/>
 </mask>

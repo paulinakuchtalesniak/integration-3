@@ -825,7 +825,7 @@ const moveHorizontalScrollTimeline = () => {
         (document.querySelector(".section-eleventh").offsetWidth +
           window.innerWidth),
       scrub: 0.2,
-      markers: true,
+      // markers: true,
     },
   });
   gsap.to(
@@ -840,15 +840,31 @@ const moveHorizontalScrollTimeline = () => {
           (document.querySelector(".section-eleventh").offsetWidth +
             window.innerWidth),
         scrub: 0.2,
-        markers: true,
+        // markers: true,
       },
     },
     0
   );
 };
 
+const animateRippedTicket = () => {
+  gsap.to(".gsap-ticket-part", {
+    x: "8vw",
+    y: "10vh",
+    rotate: "15deg",
+    scrollTrigger: {
+      trigger: ".header",
+      start: "top top",
+      end: "bottom 20%",
+      scrub: 0.3,
+      markers: true,
+    },
+  });
+};
+
 const init = () => {
   gsap.registerPlugin(ScrollTrigger);
+  animateRippedTicket();
   moveBulb();
   mapAnimation();
   manipulateLinesDisplay();
