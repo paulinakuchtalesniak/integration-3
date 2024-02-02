@@ -2671,6 +2671,8 @@ header+.pin-spacer {
 
 
 /* SECTION 9 */
+
+
 .station-photo {
     display: none;
     border-radius: var(--space-2xs);
@@ -2679,6 +2681,7 @@ header+.pin-spacer {
     border: var(--color-body-copy-dark) 0.5px solid;
     height: max-content;
     width: max-content;
+
 
 }
 
@@ -3122,6 +3125,7 @@ header+.pin-spacer {
 .section-tenth {
     display: grid;
     grid-template-columns: 100%;
+    overflow: hidden;
 
 }
 
@@ -3803,6 +3807,23 @@ header+.pin-spacer {
         height: 11vh;
     }
 
+}
+
+/* SECTION 13 */
+.section-thirteenth {
+    min-height: 30vh;
+    background-color: var(--color-primary-yellow);
+}
 
 
+
+/* SECTION 14 */
+.section-fourteenth {
+    min-height: 60vh;
+
+}
+
+.footer {
+    min-height: 50vh;
+    background-color: #327CC3;
 }
