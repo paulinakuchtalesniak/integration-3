@@ -84,7 +84,7 @@ const timelineComputer = () => {
       start: "top 35%",
       end: "bottom 60%",
       scrub: 1.1,
-      markers: true,
+      // markers: true,
     },
   });
 
@@ -443,33 +443,35 @@ const moveTrains = () => {
   mm.add(
     {
       isxS: "(min-width: 375px)",
-      isM: "(min-width: 767px)",
-      isL: "(min-width: 991px)",
+      isS: "(min-width: 600px)",
+      isL: "(min-width: 1200px)",
     },
     (context) => {
       const { conditions } = context;
 
-      gsap.to(".train-left", {
-        x: "50%",
-        scrollTrigger: {
-          trigger: ".section-sixth",
-          start: "top 40%",
-          end: `center 60%`,
-          scrub: 0.4,
+      const setupAnimation = (selector, xValue, start, end) => {
+        gsap.to(selector, {
+          x: xValue,
+          scrollTrigger: {
+            trigger: ".section-sixth",
+            start: start,
+            end: end,
+            scrub: 0.4,
+            // markers: true,
+          },
+        });
+      };
 
-          // markers: true,
-        },
-      });
-      gsap.to(".train-right", {
-        x: "-50%",
-        scrollTrigger: {
-          trigger: ".section-sixth",
-          start: "center 60%",
-          end: `bottom 70% `,
-          scrub: 0.4,
-          // markers: true,
-        },
-      });
+      if (conditions.isL) {
+        setupAnimation(".train-left", "0", "top 90%", "center 60%");
+        setupAnimation(".train-right", "0", "center 90%", "bottom 60%");
+      } else if (conditions.isS) {
+        setupAnimation(".train-left", "20%", "top 100%", "center 70%");
+        setupAnimation(".train-right", "-20%", "center 80%", "bottom center");
+      } else if (conditions.isxS) {
+        setupAnimation(".train-left", "50%", "top 80%", "center center");
+        setupAnimation(".train-right", "-50%", "center 80%", "bottom center");
+      }
     }
   );
 };
