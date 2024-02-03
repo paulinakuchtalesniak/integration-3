@@ -188,7 +188,7 @@ const createHorizontalScroll = () => {
       start: "top top",
       pin: true,
       scrub: 1,
-      snap: 1 / (sections.length - 1),
+
       end: () => "+=" + document.querySelector(".section-eleventh").offsetWidth,
       // markers: true,
     },
@@ -851,7 +851,22 @@ const moveHorizontalScrollTimeline = () => {
           (document.querySelector(".section-eleventh").offsetWidth +
             window.innerWidth),
         scrub: 0.2,
-        // markers: true,
+        markers: true,
+      },
+    },
+    0
+  );
+  gsap.from(
+    ".horizontal-scroll__timeline-dot",
+    {
+      opacity: 0,
+      display: "none",
+      duration: 1,
+      scrollTrigger: {
+        trigger: ".section-eleventh",
+        start: "top top",
+
+        markers: true,
       },
     },
     0
@@ -921,8 +936,8 @@ const init = () => {
   addHoverToCityDots();
   revealTickets();
   revealMasterPieceLine();
-  createHorizontalScroll();
   moveHorizontalScrollTimeline();
+  createHorizontalScroll();
 
   const navLinks = document.querySelectorAll(".navigation__list-link");
   let currentActiveId = "";
