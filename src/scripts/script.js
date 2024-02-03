@@ -351,18 +351,6 @@ const showSection = (index) => {
     }
   });
 };
-const addClickEventDispute = () => {
-  document.querySelector(".arrow-left").addEventListener("click", () => {
-    currentSectionIndex = (currentSectionIndex + 1) % sections.length;
-    showSection(currentSectionIndex);
-  });
-
-  document.querySelector(".arrow-right").addEventListener("click", () => {
-    currentSectionIndex =
-      (currentSectionIndex - 1 + sections.length) % sections.length;
-    showSection(currentSectionIndex);
-  });
-};
 
 const handleKeyDownDispute = (event) => {
   if (event.key === "ArrowLeft") {
@@ -904,6 +892,7 @@ const handleSwitchPhoneNav = () => {
 
 const init = () => {
   gsap.registerPlugin(ScrollTrigger);
+
   hamburger.addEventListener("click", handleSwitchPhoneNav);
   if (window.innerWidth > 768) {
     animateRippedTicket();
@@ -914,11 +903,11 @@ const init = () => {
   setupAnimations();
   triggerPhotos();
   timelineComputer();
+
   if (window.innerWidth > 768) {
     showSection(currentSectionIndex);
     document.addEventListener("keydown", handleKeyDownDispute);
   }
-  addClickEventDispute();
   manipulateTicket();
   createAccordeon();
   revealMinister();
@@ -938,35 +927,6 @@ const init = () => {
   revealMasterPieceLine();
   moveHorizontalScrollTimeline();
   createHorizontalScroll();
-
-  const navLinks = document.querySelectorAll(".navigation__list-link");
-  let currentActiveId = "";
-
-  gsap.utils.toArray(".section").forEach((section) => {
-    ScrollTrigger.create({
-      trigger: section,
-      start: "top top+=10vh",
-      end: "bottom top",
-      onEnter: () => updateActiveLink(section.id),
-      onEnterBack: () => updateActiveLink(section.id),
-    });
-  });
-
-  function updateActiveLink(newActiveId) {
-    if (currentActiveId !== newActiveId) {
-      navLinks.forEach((link) => {
-        link.classList.remove("active");
-      });
-
-      navLinks.forEach((link) => {
-        if (link.href.includes(newActiveId)) {
-          link.classList.add("active");
-        }
-      });
-
-      currentActiveId = newActiveId;
-    }
-  }
 };
 
 init();
