@@ -914,6 +914,35 @@ const init = () => {
   revealMasterPieceLine();
   createHorizontalScroll();
   moveHorizontalScrollTimeline();
+
+  const navLinks = document.querySelectorAll(".navigation__list-link");
+  let currentActiveId = ""; 
+
+  gsap.utils.toArray(".section").forEach((section) => {
+    ScrollTrigger.create({
+      trigger: section,
+      start: "top top+=10vh",
+      end: "bottom top",
+      onEnter: () => updateActiveLink(section.id),
+      onEnterBack: () => updateActiveLink(section.id),
+    });
+  });
+
+  function updateActiveLink(newActiveId) {
+    if (currentActiveId !== newActiveId) {
+      navLinks.forEach((link) => {
+        link.classList.remove("active");
+      });
+
+      navLinks.forEach((link) => {
+        if (link.href.includes(newActiveId)) {
+          link.classList.add("active");
+        }
+      });
+
+      currentActiveId = newActiveId;
+    }
+  }
 };
 
 init();

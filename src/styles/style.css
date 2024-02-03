@@ -558,7 +558,7 @@ header {
 }
 
 
-@media screen and (min-width: 500px) and (max-width: 767px) {
+@media screen and (min-width: 500px) {
 
     .header__illustration--small {
         height: 80vh;
@@ -620,6 +620,17 @@ header {
         display: none
     }
 
+    .navigation__list-item {
+        border: none;
+    }
+
+    .navigation__list-link.active {
+      border-bottom: var(--accent-light-blue) 0.5px solid;
+      padding-bottom: var(--space-2xs);
+
+
+    }
+
     .navigation__list-link {
         color: var(--accent-light-blue);
         font-family: var(--heading-font);
@@ -651,6 +662,8 @@ header {
         font-size: calc(var(--step-5)*1.1);
 
     }
+
+
 }
 
 
