@@ -16,7 +16,7 @@ const setupAnimations = () => {
       trigger: ".second-section",
       start: "top 20%",
       end: "bottom 40%",
-      scrub: 2,
+      scrub: 1.8,
       // markers: true,
     },
   });
@@ -83,8 +83,8 @@ const timelineComputer = () => {
       trigger: ".second-section",
       start: "top 35%",
       end: "bottom 60%",
-      scrub: 1.2,
-      // markers: true,
+      scrub: 1.1,
+      markers: true,
     },
   });
 
@@ -292,7 +292,7 @@ const moveBulb = () => {
   tlBulb = gsap.timeline({
     scrollTrigger: {
       trigger: ".first-section",
-      start: "top 10%",
+      start: "top 30%",
       end: "center center",
 
       // markers: true,
@@ -309,9 +309,9 @@ const moveBulb = () => {
       { rotation: -10, transformOrigin: "50% 50%" },
       {
         rotation: 10,
-        duration: 1.5,
+        duration: 2,
         yoyo: true,
-        repeat: 2,
+        repeat: -1,
         transformOrigin: "50% bottom",
         ease: "power1.inOut",
       }
@@ -859,7 +859,7 @@ const animateRippedTicket = () => {
       start: "top top",
       end: "bottom 20%",
       scrub: 0.3,
-      markers: true,
+      // markers: true,
     },
   });
 };
@@ -916,7 +916,7 @@ const init = () => {
   moveHorizontalScrollTimeline();
 
   const navLinks = document.querySelectorAll(".navigation__list-link");
-  let currentActiveId = ""; 
+  let currentActiveId = "";
 
   gsap.utils.toArray(".section").forEach((section) => {
     ScrollTrigger.create({
