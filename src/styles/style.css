@@ -1432,10 +1432,70 @@ header+.pin-spacer {
     grid-column: 1/4;
     justify-self: center;
     align-self: center;
-    padding-top: var(--space-m);
+    padding-top: var(--space-s);
     width: auto;
-    height: 100%;
+    height: 17vh;
+}
 
+.leafe-dispute {
+    transform-origin: bottom center;
+    animation: rotateBackAndForth 5s infinite;
+    animation-timing-function: ease-in-out;
+
+}
+
+@keyframes rotateBackAndForth {
+
+    0%,
+    100% {
+        transform: rotate(-10deg);
+
+    }
+
+    50% {
+        transform: rotate(1deg);
+
+    }
+}
+
+.money-dispute,
+.diamond-dispute {
+    transform-origin: center 70%;
+    animation: scaleBackAndForth 5s infinite;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes scaleBackAndForth {
+
+    0%,
+    100% {
+        transform: scale(1);
+
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+.train-dispute {
+    animation: scaleAndMoveY 5s infinite;
+    animation-timing-function: ease-in-out;
+    transform-origin: bottom center;
+}
+
+@keyframes scaleAndMoveY {
+
+    0%,
+    100% {
+        transform: scale(1) translateY(0);
+
+    }
+
+    50% {
+        transform: scale(1.1) translateY(14px);
+
+    }
 }
 
 
@@ -1492,7 +1552,7 @@ header+.pin-spacer {
     }
 
     .plate-dispute__svg-small {
-        height: 80%;
+        height: 30vw;
         width: auto;
     }
 
@@ -1526,9 +1586,10 @@ header+.pin-spacer {
     }
 
     .plate-dispute__svg-small {
-        height: 90%;
+        height: 25vw;
         width: auto;
     }
+
 
     .opinion__paragraph {
         padding-top: var(--space-l);
@@ -1558,6 +1619,11 @@ header+.pin-spacer {
 
         width: 65vw;
 
+    }
+
+    .plate-dispute__svg-small {
+        height: 27vw;
+        width: auto;
     }
 
 }
@@ -1611,14 +1677,6 @@ header+.pin-spacer {
 
 
 
-    .opinion__section {
-        width: 100vw;
-        scroll-snap-align: none;
-
-
-
-
-    }
 
     .opinion__section p {
         opacity: 0;
@@ -1646,9 +1704,12 @@ header+.pin-spacer {
     }
 
     .opinion__section {
-        grid-template-rows: 1fr 2fr;
+
         padding: var(--space-m) 0 0 var(--space-xs);
         grid-template-columns: 17vw repeat(3, 1fr) 17vw;
+        grid-template-rows: 1.2fr 2fr;
+        width: 100vw;
+        scroll-snap-align: none;
 
     }
 
@@ -1664,13 +1725,14 @@ header+.pin-spacer {
     .plate-dispute__svg-small {
         justify-self: center;
         align-self: center;
-        height: 120%;
+        height: 16vw;
         width: auto;
         grid-column: 2/5;
     }
 
+
     .opinion__paragraph {
-        padding-top: var(--space-xl);
+        padding-top: var(--space-m);
         font-size: calc(var(--step-0)*1.1);
         grid-column: 2/5;
     }
@@ -1681,6 +1743,12 @@ header+.pin-spacer {
     .opinion__section {
         grid-template-columns: 18vw repeat(3, 1fr) 18vw;
 
+    }
+
+    .opinion__paragraph {
+        padding-top: var(--space-l);
+        font-size: calc(var(--step-0)*1.1);
+        grid-column: 2/5;
     }
 
     .dispute-photo__wrapper {
@@ -1708,8 +1776,14 @@ header+.pin-spacer {
 
     }
 
+    .plate-dispute__svg-small {
+
+        height: 13vw;
+
+    }
+
     .opinion__section {
-        grid-template-columns: 25vw repeat(3, 1fr) 25vw;
+        grid-template-columns: 26vw repeat(3, 1fr) 26vw;
 
     }
 
@@ -1731,9 +1805,6 @@ header+.pin-spacer {
 
     }
 }
-
-
-
 
 
 @media screen and (min-width: 1350px) {
@@ -1940,6 +2011,7 @@ header+.pin-spacer {
         align-self: flex-end;
         justify-self: flex-end;
         max-height: 24vw;
+
     }
 }
 
@@ -2628,6 +2700,8 @@ header+.pin-spacer {
         grid-row: 1/3;
         grid-column: 1;
         align-self: center;
+        width: 100%;
+        height: auto;
         padding-top: var(--space-s);
     }
 
@@ -2768,9 +2842,15 @@ header+.pin-spacer {
 .section-eight {
     padding: var(--space-s) 0 var(--space-2xl) 0;
     display: grid;
-    grid-template-rows: max-content max-content;
+    grid-template-rows: max-content max-content 15vh;
     min-height: 100vh;
+    background-image: url('../assets/section8/museum1.png');
+    background-position: left top;
+    background-repeat: no-repeat;
+    background-size: cover;
+
 }
+
 
 .achievment-heading__warapper {
     display: grid;
@@ -2999,6 +3079,8 @@ header+.pin-spacer {
         grid-row: 1;
         grid-column: 1/3;
         align-self: center;
+        width: 100%;
+        height: auto;
     }
 
 
@@ -3157,31 +3239,29 @@ header+.pin-spacer {
 }
 
 
+.masterstroke-phone__ticket-eurostar,
+.masterstroke-phone__ticket-thalis {
+    align-self: flex-end;
+    height: 50vw;
+    width: auto;
+    z-index: 1;
+    transition: transform 0.5s ease-in-out;
+    cursor: pointer;
+}
+
 .masterstroke-phone__ticket-eurostar {
     grid-row: 1/3;
     grid-column: 1/4;
-    align-self: flex-end;
     transform: translateX(-80%);
     margin-bottom: var(--space-xl);
-    height: 50vw;
-    width: auto;
-    animation: pulsate 1.5s infinite ease-in-out;
-    transition: transform 0.5s ease-in-out;
-    z-index: 1;
 }
 
 .masterstroke-phone__ticket-thalis {
     grid-row: 3/5;
     grid-column: 1/4;
-    align-self: flex-end;
     margin-bottom: var(--space-3xl);
     justify-self: flex-end;
     transform: translateX(80%);
-    height: 50vw;
-    width: auto;
-    z-index: 1;
-
-    transition: transform 0.5s ease-in-out;
 }
 
 .masterstroke-phone__eurostar {
@@ -3366,6 +3446,8 @@ header+.pin-spacer {
         grid-column: 1;
         align-self: center;
         padding-top: var(--space-s);
+        width: 100%;
+        height: auto;
     }
 
     .masterstroke__heading {
@@ -3556,13 +3638,15 @@ header+.pin-spacer {
 .section-tenth {
     display: grid;
     grid-template-columns: 100%;
-    overflow: hidden;
+    grid-template-rows: repeat(3, max-content) 1fr;
+    overflow-x: hidden;
+    min-height: 105vh;
 
 }
 
 .division__image {
 
-    grid-row: 1/4;
+    grid-row: 1/5;
     grid-column: 1;
     background-image: url('../assets/section10/division-section.jpeg');
     background-position: bottom;
@@ -3573,7 +3657,7 @@ header+.pin-spacer {
 }
 
 .division__heading {
-    padding: var(--space-xl) 0 var(--space-s) var(--space-s);
+    padding: var(--space-2xl) 0 var(--space-m) var(--space-s);
     grid-row: 1;
     grid-column: 1;
     font-family: var(--heading-font);
@@ -3587,7 +3671,7 @@ header+.pin-spacer {
 .division__paragraph {
     grid-row: 2;
     grid-column: 1;
-    padding: 0 var(--space-s) var(--space-s) var(--space-s);
+    padding: 0 var(--space-s) var(--space-l) var(--space-s);
     line-height: 1.5;
     font-size: var(--step-0);
     color: var(--color-body-copy-dark);
@@ -3617,6 +3701,7 @@ header+.pin-spacer {
     grid-column: 1;
     height: 70%;
     width: auto;
+
     align-self: center;
 }
 
@@ -3640,7 +3725,7 @@ header+.pin-spacer {
     grid-column: 1;
     justify-self: center;
     width: 90%;
-    padding-bottom: var(--space-3xl);
+    padding-bottom: var(--space-s);
 
 
 }
@@ -3655,7 +3740,37 @@ header+.pin-spacer {
     color: var(--color-body-copy-dark);
 }
 
+@media screen and (min-width: 375px) and (max-width: 389px) {
+    .section-tenth {
+
+        min-height: 155vh;
+
+    }
+}
+
+@media screen and (min-width: 390px) and (max-width: 413px) {
+    .section-tenth {
+
+        min-height: 120vh;
+
+    }
+}
+
+@media screen and (min-width: 430px) {
+    .section-tenth {
+
+        min-height: 125vh;
+
+    }
+}
+
 @media screen and (min-width: 600px) {
+
+    .section-tenth {
+
+        min-height: 100vh;
+
+    }
 
     .division__heading {
         padding: var(--space-xl) 0 var(--space-s) var(--space-m);
@@ -3672,7 +3787,7 @@ header+.pin-spacer {
         justify-self: flex-start;
         max-width: 60ch;
         margin-left: var(--space-m);
-        padding-bottom: var(--space-3xl);
+        padding-bottom: var(--space-xs);
     }
 
     .accordeon-arrow {
@@ -3684,11 +3799,21 @@ header+.pin-spacer {
 
 }
 
+@media screen and (min-width: 700px) {
+    .section-tenth {
+
+        min-height: 100vh;
+
+    }
+}
+
+
 @media screen and (min-width: 768px) {
     .section-tenth {
         display: grid;
         grid-template-columns: 100%;
         column-gap: var(--space-m);
+        min-height: 80vh;
     }
 
     .accordeon__wrapper {
@@ -3787,11 +3912,11 @@ header+.pin-spacer {
     .accordion__btn img {
         grid-row: 1;
         grid-column: 1;
-        height: 90%;
+        height: 10vh;
         width: auto;
         align-self: center;
         justify-self: center;
-        padding: 0;
+
     }
 
 
@@ -3819,6 +3944,15 @@ header+.pin-spacer {
 
         padding: 0 var(--space-s) var(--space-s) var(--space-xl);
 
+    }
+
+}
+
+@media screen and (min-width: 1280px) {
+
+    .accordeon__wrapper {
+
+        padding-bottom: var(--space-xl);
     }
 
 }

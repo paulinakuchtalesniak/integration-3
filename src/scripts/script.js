@@ -154,20 +154,27 @@ const updateDescription = (clickedSection) => {
 };
 
 const createAccordeon = () => {
-  const accordeonParts = document.querySelectorAll(".accordion__btn");
-  let i;
+  const accordionParts = document.querySelectorAll(".accordion__btn");
+  let activePanel = null;
 
-  for (i = 0; i < accordeonParts.length; i++) {
-    accordeonParts[i].addEventListener("click", function () {
+  accordionParts.forEach((part) => {
+    part.addEventListener("click", function () {
+      if (activePanel && activePanel !== this.nextElementSibling) {
+        activePanel.style.maxHeight = null;
+        activePanel.previousElementSibling.classList.remove("active");
+      }
+
       this.classList.toggle("active");
       let panel = this.nextElementSibling;
       if (panel.style.maxHeight) {
         panel.style.maxHeight = null;
+        activePanel = null;
       } else {
         panel.style.maxHeight = panel.scrollHeight + "px";
+        activePanel = panel;
       }
     });
-  }
+  });
 };
 
 const createHorizontalScroll = () => {
