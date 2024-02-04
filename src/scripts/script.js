@@ -5,6 +5,9 @@ let currentSectionIndex = 0;
 const sections = document.querySelectorAll(".opinion__section");
 const hamburger = document.querySelector(".header__hamburger");
 const navList = document.querySelector(".navigation__list");
+let activePanel = null;
+const prevButton = document.querySelector(".arrow-right");
+const nextButton = document.querySelector(".arrow-left");
 
 // PHONE & TABLET TIMELINE
 const setupAnimations = () => {
@@ -59,7 +62,6 @@ const triggerPhotos = () => {
               trigger: heading,
               start: () => `top ${conditions.isL ? "41%" : "30%"}`,
               end: () => `bottom top`,
-              // scrub: 0.4,
               onEnter: () => gsap.to(article, { opacity: 1 }),
               onLeaveBack: () => gsap.to(article, { opacity: 0 }),
               // markers: true,
@@ -103,77 +105,85 @@ const timelineComputer = () => {
   );
 };
 
-const handleFlip = (frontElement, backElement) => {
-  const wrapper = document.querySelector(".scanned-ticket__wrapper");
-  return function () {
-    wrapper.style.scrollSnapType = "none";
+const handleFlip = (frontElement, backElement, wrapper) => {
+  wrapper.style.scrollSnapType = "none";
 
-    frontElement.classList.toggle("flipped");
-    backElement.classList.toggle("flipped");
+  frontElement.classList.toggle("flipped");
+  backElement.classList.toggle("flipped");
 
-    setTimeout(() => {
-      wrapper.style.scrollSnapType = "x mandatory";
-    }, 200);
-  };
+  setTimeout(() => {
+    wrapper.style.scrollSnapType = "x mandatory";
+  }, 200);
 };
 
 const manipulateTicket = () => {
-  const front = document.querySelectorAll(".scanned-ticked__front");
-  const back = document.querySelectorAll(".scanned-ticked__back");
+  const tickets = document.querySelectorAll(".scanned-ticket");
+  const wrapper = document.querySelector(".scanned-ticket__wrapper");
+
   if (window.innerWidth < 1200) {
-    front.forEach((frontItem, index) => {
-      const backItem = back[index];
-      frontItem.addEventListener("click", handleFlip(frontItem, backItem));
-      backItem.addEventListener("click", handleFlip(frontItem, backItem));
+    tickets.forEach((ticket) => {
+      const frontItem = ticket.querySelector(".scanned-ticked__front");
+      const backItem = ticket.querySelector(".scanned-ticked__back");
+
+      frontItem.addEventListener("click", () =>
+        handleFlip(frontItem, backItem, wrapper)
+      );
+      backItem.addEventListener("click", () =>
+        handleFlip(frontItem, backItem, wrapper)
+      );
     });
   }
 };
 
 const updateDescription = (clickedSection) => {
-  console.log(clickedSection);
-  const name = clickedSection.getAttribute("data-name");
-  const sections = document.querySelectorAll(".scanned-ticket");
-  const correspondingDescription = document.querySelector(
-    `.ticket__description[data-name="${name}"]`
-  );
-  sections.forEach((section) => {
-    section.style.opacity = "1";
-    if (section != clickedSection) {
-      section.style.opacity = "0.5";
-    }
-  });
+  if (window.innerWidth > 1200) {
+    const name = clickedSection.getAttribute("data-name");
+    const sections = document.querySelectorAll(".scanned-ticket");
+    const correspondingDescription = document.querySelector(
+      `.ticket__description[data-name="${name}"]`
+    );
+    sections.forEach((section) => {
+      section.style.opacity = "1";
+      if (section != clickedSection) {
+        section.style.opacity = "0.5";
+      }
+    });
 
-  document.querySelectorAll(".ticket__description").forEach((description) => {
-    if (description === correspondingDescription) {
-      console.log("yes");
-      description.style.opacity = "1";
-    } else {
-      description.style.opacity = "0";
-    }
-  });
+    document.querySelectorAll(".ticket__description").forEach((description) => {
+      if (description === correspondingDescription) {
+        description.style.opacity = "1";
+      } else {
+        description.style.opacity = "0";
+      }
+    });
+  }
+};
+
+const checkClickedAccordeonBtn = (event) => {
+  const clickedElement = event.currentTarget;
+  const panel = clickedElement.nextElementSibling;
+
+  if (activePanel && activePanel !== panel) {
+    activePanel.style.maxHeight = null;
+    activePanel.previousElementSibling.classList.remove("active");
+  }
+
+  clickedElement.classList.toggle("active");
+
+  if (panel.style.maxHeight) {
+    panel.style.maxHeight = null;
+    activePanel = null;
+  } else {
+    panel.style.maxHeight = panel.scrollHeight + "px";
+    activePanel = panel;
+  }
 };
 
 const createAccordeon = () => {
   const accordionParts = document.querySelectorAll(".accordion__btn");
-  let activePanel = null;
 
   accordionParts.forEach((part) => {
-    part.addEventListener("click", function () {
-      if (activePanel && activePanel !== this.nextElementSibling) {
-        activePanel.style.maxHeight = null;
-        activePanel.previousElementSibling.classList.remove("active");
-      }
-
-      this.classList.toggle("active");
-      let panel = this.nextElementSibling;
-      if (panel.style.maxHeight) {
-        panel.style.maxHeight = null;
-        activePanel = null;
-      } else {
-        panel.style.maxHeight = panel.scrollHeight + "px";
-        activePanel = panel;
-      }
-    });
+    part.addEventListener("click", checkClickedAccordeonBtn);
   });
 };
 
@@ -232,7 +242,7 @@ const mapAnimation = () => {
           scrollTrigger: {
             trigger: ".idea-map__wrapper",
             start: "top 20%",
-            end: "bottom +=100vh",
+            end: "bottom -=100vh",
             scrub: 0.7,
             pin: ".first-section",
             // markers: true,
@@ -272,36 +282,35 @@ const hideAllPaths = () => {
   });
 };
 
+const changeTrainLines = (event) => {
+  hideAllPaths();
+  const targetPathClass = event.currentTarget.getAttribute("data-target");
+  const targetPath = document.querySelectorAll(`.${targetPathClass}`);
+  targetPath.forEach((path) => {
+    path.style.display = "block";
+  });
+  if (event.currentTarget.getAttribute("data-target") === "all") {
+    const targetPaths = document.querySelectorAll(".line");
+    targetPaths.forEach((path) => {
+      path.style.display = "block";
+    });
+  }
+};
+
 const manipulateLinesDisplay = () => {
   const buttons = document.querySelectorAll(".idea-section__button-train");
-
   buttons.forEach((button) => {
-    button.addEventListener("click", () => {
-      hideAllPaths();
-      const targetPathClass = button.getAttribute("data-target");
-      const targetPath = document.querySelectorAll(`.${targetPathClass}`);
-      targetPath.forEach((path) => {
-        path.style.display = "block";
-      });
-      if (button.getAttribute("data-target") === "all") {
-        const targetPaths = document.querySelectorAll(".line");
-        targetPaths.forEach((path) => {
-          path.style.display = "block";
-        });
-      }
-    });
+    button.addEventListener("click", changeTrainLines);
   });
 };
 
 const moveBulb = () => {
   let tlBulb;
-
   tlBulb = gsap.timeline({
     scrollTrigger: {
       trigger: ".first-section",
       start: "top 30%",
       end: "center center",
-
       // markers: true,
     },
   });
@@ -362,6 +371,7 @@ const handleKeyDownDispute = (event) => {
     showSection(currentSectionIndex);
   }
 };
+
 const revealMinister = () => {
   const path = document.querySelector(`.minister-path`);
   const pathSecond = document.querySelector(`.minister-path--second`);
@@ -485,6 +495,7 @@ const countToNumber = (element, endValue, lenght) => {
     }
   }, stepTime);
 };
+
 // PHONE/TABLET
 const displayKm = () => {
   const mm = gsap.matchMedia();
@@ -737,7 +748,7 @@ const addHoverToCityDots = () => {
     dot.addEventListener("mouseover", () => {
       if (dot.style.opacity > 0 && window.innerWidth > 1080) {
         const cityName = dot.getAttribute("data-city-name");
-        console.log(dot.style.opacity);
+
         const correspondingPhoto = Array.from(photosStations).find(
           (photo) => photo.getAttribute("data-city-name") === cityName
         );
@@ -745,7 +756,6 @@ const addHoverToCityDots = () => {
           correspondingPhoto.style.display = "block";
 
           const dotBox = dot.getBoundingClientRect();
-          console.log(dotBox);
           correspondingPhoto.style.transform = `translate(${
             dotBox.x + dotBox.width
           }px, ${-dotBox.y}px)`;
@@ -839,7 +849,7 @@ const moveHorizontalScrollTimeline = () => {
           (document.querySelector(".section-eleventh").offsetWidth +
             window.innerWidth),
         scrub: 0.2,
-        markers: true,
+        // markers: true,
       },
     },
     0
@@ -854,7 +864,7 @@ const moveHorizontalScrollTimeline = () => {
         trigger: ".section-eleventh",
         start: "top top",
 
-        markers: true,
+        // markers: true,
       },
     },
     0
@@ -895,7 +905,6 @@ const animateLastSection = () => {
   const pathTechnological = document.querySelector(`.technological-path`);
 
   const pathLength = pathTechnological.getTotalLength();
-  console.log(pathTechnological, pathLength);
   gsap.set(pathTechnological, {
     strokeDasharray: pathLength,
     strokeDashoffset: pathLength,
@@ -944,6 +953,18 @@ const animateLastSection = () => {
     }
   );
 };
+const addArrowClick = () => {
+  prevButton.addEventListener("click", () => {
+    currentSectionIndex =
+      (currentSectionIndex - 1 + sections.length) % sections.length;
+    showSection(currentSectionIndex);
+  });
+
+  nextButton.addEventListener("click", () => {
+    currentSectionIndex = (currentSectionIndex + 1) % sections.length;
+    showSection(currentSectionIndex);
+  });
+};
 
 const init = () => {
   gsap.registerPlugin(ScrollTrigger);
@@ -958,20 +979,17 @@ const init = () => {
   setupAnimations();
   triggerPhotos();
   timelineComputer();
-
   if (window.innerWidth > 768) {
     showSection(currentSectionIndex);
     document.addEventListener("keydown", handleKeyDownDispute);
+    addArrowClick();
   }
   manipulateTicket();
   createAccordeon();
   revealMinister();
-  if (window.innerWidth > 1200) {
-    document.querySelectorAll(".scanned-ticket").forEach((section) => {
-      section.addEventListener("click", () => updateDescription(section));
-    });
-  }
-
+  document.querySelectorAll(".scanned-ticket").forEach((section) => {
+    section.addEventListener("click", () => updateDescription(section));
+  });
   moveTrains();
   displayKm();
   revealLineTrainsDesktop();
