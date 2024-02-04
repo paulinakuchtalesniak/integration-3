@@ -40,7 +40,7 @@ html {
     overflow-y: scroll;
     height: 100%;
     -webkit-overflow-scrolling: touch;
-    overflow-scrolling: touch;
+
 
 }
 
@@ -697,6 +697,21 @@ header {
 
 }
 
+@media screen and (min-width: 1500px) {
+
+    .header__des--third {
+
+        padding-top: var(--space-xs);
+    }
+
+    .header__illustration--big {
+        width: max-content
+    }
+
+
+}
+
+
 /* SECTION 1 */
 
 .first-section {
@@ -1062,6 +1077,44 @@ header+.pin-spacer {
     display: grid;
     grid-template-columns: 100%;
     grid-template-rows: 100%;
+}
+
+.copyright-info {
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    grid-row: 1;
+    grid-column: 1;
+    z-index: 4;
+    color: var(--color-primary);
+    align-self: flex-end;
+    margin: var(--space-s);
+}
+
+.copyright-info--black{
+    color: rgb(30, 30, 30);
+}
+.tooltip-content {
+    visibility: hidden;
+    width: 20vw;
+    background-color: rgba(231, 231, 231, 0.612);
+    color: #303030;
+    text-align: center;
+    border-radius: 1px;
+    padding: var(--space-2xs) 0;
+    font-size: var(--step--2);
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    bottom:3vh;
+    left: 0;
+
+}
+
+
+.copyright-info:hover .tooltip-content {
+    visibility: visible;
 }
 
 
@@ -2219,7 +2272,7 @@ header+.pin-spacer {
         min-height: 15vh;
         padding: var(--space-l) var(--space-3xl) 0 var(--space-xl);
         display: grid;
-        grid-template-columns: 1fr 1fe;
+        grid-template-columns: 1fr 1fr;
         grid-template-rows: 100%;
 
     }
@@ -2301,7 +2354,7 @@ header+.pin-spacer {
         grid-column: 1;
         opacity: 0;
         display: grid;
-        grid-template-columns: 50%;
+        grid-template-columns: 100%;
         grid-template-rows: max-content auto;
     }
 
@@ -2313,10 +2366,7 @@ header+.pin-spacer {
         height: 13vh;
     }
 
-    .ticket__description {
-        grid-template-columns: 45%;
 
-    }
 
     .scanned-ticket__heading--phone {
         display: none;
@@ -4393,12 +4443,20 @@ header+.pin-spacer {
 
 
 /* SECTION 12 */
+.technological-first-line {
+    display: none;
+}
 
 .section-twelfth {
     display: grid;
     grid-template-columns: 100%;
     padding: 0 0 var(--space-2xl) 0;
 
+}
+
+.technological-heading__wrapper {
+    grid-row: 1;
+    grid-column: 1;
 }
 
 .vision__heading {
@@ -4409,8 +4467,7 @@ header+.pin-spacer {
     font-weight: 600;
     color: var(--color-light-blue);
     line-height: 1.1;
-    grid-row: 1;
-    grid-column: 1;
+
 
 }
 
@@ -4436,20 +4493,14 @@ header+.pin-spacer {
     grid-column: 1;
     padding: var(--space-s) var(--space-s) var(--space-s) var(--space-s);
     justify-self: center;
-    aspect-ratio: 1/ 1;
-    object-fit: cover;
-    height: auto;
-    width: 90vw
-}
 
-@media screen and (min-width: 500px) {
-
-    .vision__train {
-        aspect-ratio: 4/ 3;
-        width: 90vw
-    }
 
 }
+
+.vision__train img {
+    border-radius: 2%;
+}
+
 
 
 @media screen and (min-width: 600px) {
@@ -4467,9 +4518,19 @@ header+.pin-spacer {
         width: auto;
     }
 
+    .vision__train img {
+        height: 44vh;
+        width: auto;
+    }
+
 }
 
 @media screen and (min-width: 768px) {
+    .vision__badges-wrapper {
+        justify-content: center;
+        gap: var(--space-xl);
+    }
+
     .vision__badges-wrapper img {
         height: 10vh;
         width: auto;
@@ -4482,14 +4543,18 @@ header+.pin-spacer {
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-template-rows: max-content max-content max-content;
-        padding: 0 0 var(--space-2xl) 0;
+        padding: var(--space-l) 0 var(--space-3xl) 0;
 
     }
 
-    .vision__heading {
-        padding: var(--space-3xl) 0 var(--space-s) var(--space-s);
+    .technological-heading__wrapper {
         grid-row: 1;
         grid-column: 1/3;
+    }
+
+    .vision__heading {
+        padding: var(--space-3xl) 0 var(--space-l) var(--space-s);
+
     }
 
     .vision__description {
@@ -4506,13 +4571,13 @@ header+.pin-spacer {
         grid-column: 1;
         padding: var(--space-s) var(--space-s) var(--space-s) var(--space-s);
         display: flex;
-        justify-content: space-evenly;
+        justify-content: center;
     }
 
     .vision__train {
         grid-row: 2/4;
         grid-column: 2;
-        width: 70vw
+
     }
 
     .vision__badges-wrapper img {
@@ -4520,11 +4585,35 @@ header+.pin-spacer {
         width: auto;
     }
 
+    .vision__train img {
+        height: auto;
+        width: 45vw;
+    }
+
 }
 
 @media screen and (min-width: 1080px) {
+
+    .technological-heading__wrapper {
+        display: grid;
+        grid-template-columns: repeat(15, 1fr);
+        padding: var(--space-3xl) 0 var(--space-xl) 0;
+    }
+
+    .technological-first-line {
+        display: block;
+        grid-column: 1/3;
+        grid-row: 1;
+        width: 100%;
+        height: auto;
+    }
+
     .vision__heading {
-        padding: var(--space-3xl) var(--space-m) var(--space-s) var(--space-l);
+        padding: var(--space-3xl) var(--space-m) var(--space-xl) var(--space-l);
+        grid-column: 3/15;
+        grid-row: 1;
+        padding: 0;
+        padding-left: var(--space-s);
 
     }
 
@@ -4542,6 +4631,11 @@ header+.pin-spacer {
     .vision__train {
         grid-row: 2/5;
         grid-column: 2;
+    }
+
+    .vision__train img {
+        height: auto;
+        width: 45vw;
     }
 
     .vision__badges-wrapper img {
@@ -4565,8 +4659,12 @@ header+.pin-spacer {
     .vision__train {
         grid-row: 2/4;
         grid-column: 2;
+
+    }
+
+    .vision__train img {
         height: auto;
-        width: 70%;
+        width: 40vw;
     }
 
     .vision__badges-wrapper img {
@@ -4660,6 +4758,8 @@ header+.pin-spacer {
     font-size: var(--step-1);
     font-weight: 500;
     color: var(--color-primary);
+    cursor: pointer;
+    z-index: 3;
 }
 
 .story-title {
@@ -4716,6 +4816,7 @@ header+.pin-spacer {
         margin: var(--space-l) var(--space-2xl) var(--space-l) var(--space-xl);
         gap: var(--space-xl);
         border-top: var(--color-primary) 1px solid;
+        z-index: 5;
 
     }
 
@@ -4726,6 +4827,8 @@ header+.pin-spacer {
         font-size: var(--step-1);
         font-weight: 500;
         color: var(--color-primary);
+        cursor: pointer;
+        z-index: 3;
     }
 
     .story-title {

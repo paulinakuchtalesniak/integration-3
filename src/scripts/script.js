@@ -889,6 +889,61 @@ const handleSwitchPhoneNav = () => {
     navList.classList.add("active");
   }
 };
+const animateLastSection = () => {
+  const mm = gsap.matchMedia();
+  const badges = document.querySelectorAll(`.vision__badge`);
+  const pathTechnological = document.querySelector(`.technological-path`);
+
+  const pathLength = pathTechnological.getTotalLength();
+  console.log(pathTechnological, pathLength);
+  gsap.set(pathTechnological, {
+    strokeDasharray: pathLength,
+    strokeDashoffset: pathLength,
+  });
+  let tlTechnological;
+  mm.add(
+    {
+      isxL: "(min-width: 1080px)",
+    },
+    (context) => {
+      const { conditions } = context;
+      if (conditions.isxL) {
+        tlTechnological = gsap.timeline({
+          scrollTrigger: {
+            trigger: ".section-twelfth",
+            start: "top top",
+            end: "bottom -=100vh",
+            scrub: 1.2,
+            pin: true,
+            // markers: true,
+          },
+        });
+      }
+
+      tlTechnological.to(pathTechnological, {
+        strokeDashoffset: 0,
+      });
+      tlTechnological.from(
+        pathTechnological,
+        {
+          display: "none",
+        },
+        "<0.03"
+      );
+      tlTechnological.from(".vision__description", {
+        x: "-100%",
+      });
+      tlTechnological.from(badges, {
+        opacity: "0",
+        stagger: 0.3,
+      });
+      tlTechnological.from(".vision__train", {
+        opacity: "0",
+        duration: 1,
+      });
+    }
+  );
+};
 
 const init = () => {
   gsap.registerPlugin(ScrollTrigger);
@@ -927,6 +982,7 @@ const init = () => {
   revealMasterPieceLine();
   moveHorizontalScrollTimeline();
   createHorizontalScroll();
+  animateLastSection();
 };
 
 init();
