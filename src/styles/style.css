@@ -93,7 +93,7 @@ header {
 .header__photo {
     grid-column: 1;
     grid-row: 1/3;
-    background-image: url('public/img/background_map.png');
+    background-image: url('./public/img/background_map.png');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -1430,7 +1430,7 @@ header+.pin-spacer {
 }
 
 .dispute-photo__wrapper {
-    background-image: url('public/img/dispute-bg.jpg');
+    background-image: url('./public/img/dispute-bg.jpg');
     background-repeat: no-repeat;
     background-position: 0;
     background-size: cover;
@@ -2894,7 +2894,7 @@ header+.pin-spacer {
     display: grid;
     grid-template-rows: max-content max-content 15vh;
     min-height: 100vh;
-    background-image: url('public/img/museum1.png');
+    background-image: url('./public/img/museum1.png');
     background-position: left top;
     background-repeat: no-repeat;
     background-size: cover;
@@ -3698,7 +3698,7 @@ header+.pin-spacer {
 
     grid-row: 1/5;
     grid-column: 1;
-    background-image: url('public/img/division-section.jpeg');
+    background-image: url('./public/img/division-section.jpeg');
     background-position: bottom;
     background-repeat: no-repeat;
     background-size: cover;
@@ -4701,7 +4701,7 @@ header+.pin-spacer {
 .invitation-bg__wrapper {
     grid-column: 1;
     grid-row: 1/5;
-    background-image: url('public/img/bg-train-world.jpeg');
+    background-image: url('./public/img/bg-train-world.jpeg');
     background-position: 49%;
     background-repeat: no-repeat;
     background-size: cover;
