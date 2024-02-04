@@ -1,5 +1,7 @@
 import "../styles/reset.css";
 import "../styles/style.css";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 let currentSectionIndex = 0;
 const sections = document.querySelectorAll(".opinion__section");
